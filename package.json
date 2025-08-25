@@ -1,0 +1,24 @@
+{
+  "name": "grondinbrochualyson_tp1",
+  "version": "1.0.0",
+  "description": "Projet 1 RPNI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "sass --watch src/scss:public/css",
+    "build": "sass src/scss:public/css --style=expanded --source-map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beastlyx31/RPNI3-TP1-formulaire.git"
+  },
+  "author": "Alyson Grondin Brochu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beastlyx31/RPNI3-TP1-formulaire/issues"
+  },
+  "homepage": "https://github.com/Beastlyx31/RPNI3-TP1-formulaire#readme",
+  "devDependencies": {
+    "normalize.scss": "^0.1.0"
+  }
+}
