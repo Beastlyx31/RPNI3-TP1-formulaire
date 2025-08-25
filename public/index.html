@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
+    <!-- Section 1 -->
     <h2>1. Choisir le montant du don</h2>
     <form>
         <fieldset>
@@ -49,6 +49,8 @@
                 <input type="number" min="1">
             </li>
         </ul>
+        <!-- Span pour message erreur -->
+        <span></span>
 
         <ul>
             <li>
@@ -79,6 +81,157 @@
                 <input type="number" min="1">
             </li>
         </ul>
+        <!-- Span pour message erreur -->
+        <span></span>
+
+        <fieldset>
+            <legend>Consacrer le don à un être cher ? </legend>
+            <input type="radio" id="oui" name="consacrerDon" value="O">
+            <label for="oui">Oui</label>
+            <input type="radio" id="non" name="consacrerDon" value="N">
+            <label for="non">Non</label>
+        </fieldset>
+        <!-- Span pour message erreur -->
+        <span></span>
+
+        <fieldset>
+            <legend> en l'honneur/en souvenir de </legend>
+            <label for="nom">Nom de l'être honoré</label>
+            <input type="text" id="nom" name="nom" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+
+            <fieldset>
+                <legend>Notifier une personne ?</legend>
+                <input type="radio" id="oui" name="notifierPers" value="O">
+                <label for="oui">Oui</label>
+                <input type="radio" id="non" name="notifierPers" value="N">
+                <label for="non">Non</label>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <div>
+                    <div>
+                        <label for="nomPers">Nom de la personne</label>
+                        <input type="text" id="nomPers" name="nomPers" required>
+                        <!-- Span pour message erreur -->
+                        <span></span>
+                    </div>
+                    <div>
+                        <label for="emailPers">Adresse courriel</label>
+                        <input type="email" id="emailPers" name="emailPers" required>
+                        <!-- Span pour message erreur -->
+                        <span></span>
+                        <!-- // -->
+                    </div>
+                </div>
+            </fieldset>
+        </fieldset>
+    </form>
+    <!-- Section 2 -->
+    <h2>2. Informations personnels</h2>
+    <form action="">
+        <fieldset>
+            <legend>Faire ce don en tant ...</legend>
+            <input type="radio" id="personnel" name="personnel" value="personnel">
+            <label for="personnel">Personnel</label>
+            <input type="radio" id="entreprise" name="entreprise" value="entreprise">
+            <label for="entreprise">Entreprise</label>
+        </fieldset>
+        <!-- Span pour message erreur -->
+        <span></span>
+        <!-- // -->
+        <fieldset>
+            <!-- Pour le don entreprise uniquement -->
+            <label for="nomEntreprise">Nom de l'entreprise</label>
+            <input type="text" id="nomEntreprise" name="nomEntreprise" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+
+            <label for="email">Adresse courriel</label>
+            <input type="email" id="email" name="email" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+        </fieldset>
+        <fieldset>
+            <label for="adresse">Adresse</label>
+            <input type="text" id="adresse" name="adresse" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+            <label for="numApp">Numero appartement</label>
+            <input type="text" id="numApp" name="">
+
+            <label for="codePostal">Code postal</label>
+            <input type="text" id="cp" name="cp" placeholder="A1B 2C3" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+
+            <label for="ville">Ville</label>
+            <input type="text" id="ville" name="ville" required>
+            <!-- Span pour message erreur -->
+            <span></span>
+            <!-- // -->
+
+            <label for="province">Province</label>
+            <input list="provinces" >
+            <datalist id="provinces">
+                <option value="">--Choisissez votre province--</option>
+                <option value="alberta">Alberta</option>
+                <option value="cb">Colombie-Britannique</option>
+                <option value="idpe">Île-du-Prince-Édouard</option>
+                <option value="manitoba">Manitoba</option>
+                <option value="nunavut">Nunavut</option>
+                <option value="nb">Nouveau-Brunswick</option>
+                <option value="ne">Nouvelle-Écosse</option>
+                <option value="ontario">Ontario</option>
+                <option value="quebec">Québec</option>
+                <option value="saskatchewan">Saskatchewan</option>
+                <option value="tnel">Terre-Neuve-et-Labrador</option>
+                <option value="tdno">Territoires du Nord-Ouest</option>
+                <option value="yukon">Yukon</option>
+            </datalist>
+            <!-- <select name="province" id="province">
+                <option value="">--Choisissez votre province--</option>
+                <option value="alberta">Alberta</option>
+                <option value="cb">Colombie-Britannique</option>
+                <option value="idpe">Île-du-Prince-Édouard</option>
+                <option value="manitoba">Manitoba</option>
+                <option value="nunavut">Nunavut</option>
+                <option value="nb">Nouveau-Brunswick</option>
+                <option value="ne">Nouvelle-Écosse</option>
+                <option value="ontario">Ontario</option>
+                <option value="quebec">Québec</option>
+                <option value="saskatchewan">Saskatchewan</option>
+                <option value="tnel">Terre-Neuve-et-Labrador</option>
+                <option value="tdno">Territoires du Nord-Ouest</option>
+                <option value="yukon">Yukon</option>
+            </select> -->
+        </fieldset>
+    </form>
+    <h2>3. Paiement</h2>
+    <form action="merci.html">
+    <label for="numCarte">Numéro de carte de crédit</label>
+    <input type="text" id="numCarte" name="numCarte" required>
+    <label for="cvc">CVC</label>
+    <input type="text" name="cvc" id="cvc" required>
+    <label for="expirationCarte">Date d'expiration de la carte</label>
+    <input type="text" name="expirationCarte" id="expirationCarte" required>
+    <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $">
     </form>
 
 </body>
