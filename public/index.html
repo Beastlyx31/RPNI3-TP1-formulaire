@@ -8,7 +8,79 @@
 </head>
 
 <body>
-    
+    <h2>1. Choisir le montant du don</h2>
+    <form>
+        <fieldset>
+            <legend></legend>
+
+            <input type="radio" id="donUnique" name="typeDon" value="unique" />
+            <label for="donUnique">Don unique</label><br />
+
+            <input type="radio" id="donMensuel" name="typeDon" value="mensuel" />
+            <label for="donMensuel">Don mensuel</label><br />
+        </fieldset>
+
+        <ul>
+            <li>
+                <input type="radio" id="50" name="montantDonUnique" value="50">
+                <label for="50">50$</label>
+                <span>Vermifuger et micropucer un animal</span>
+            </li>
+            <li>
+                <input type="radio" id="100" name="montantDonUnique" value="100">
+                <label for="100">100$</label>
+                <span>Examiner et vacciner un chien</span>
+            </li>
+            <li>
+                <input type="radio" id="125$" name="montantDonUnique" value="125">
+                <label for="125">125$</label>
+                <span>Stériliser une chatte</span>
+            </li>
+            <li>
+                <input type="radio" id="200" name="montantDonUnique" value="200">
+                <label for="200">200$</label>
+                <span>Stériliser un chien</span>
+            </li>
+            <li>
+                <input type="radio" id="autreMontant" name="montantDonUnique" value="autreMontant">
+                <label for="autreMontant">Autre montant</label>
+            </li>
+            <li>
+                <input type="number" min="1">
+            </li>
+        </ul>
+
+        <ul>
+            <li>
+                <input type="radio" id="20" name="montantDonMensuel" value="20">
+                <label for="20">20$</label>
+                <span>Nourrir un chat durant son séjour</span>
+            </li>
+            <li>
+                <input type="radio" id="35" name="montantDonMensuel" value="35">
+                <label for="35">35$</label>
+                <span>Fournir les repas et l’enrichissement à un chien durant son séjour</span>
+            </li>
+            <li>
+                <input type="radio" id="50" name="montantDonMensuel" value="50">
+                <label for="50">50$</label>
+                <span>Vermifuger et vacciner un animal</span>
+            </li>
+            <li>
+                <input type="radio" id="75" name="montantDonMensuel" value="75">
+                <label for="75">75$</label>
+                <span>Examiner et vacciner un animal</span>
+            </li>
+            <li>
+                <input type="radio" id="autreMontant" name="montantDonMensuel" value="autreMontant">
+                <label for="autreMontant">Autre montant</label>
+            </li>
+            <li>
+                <input type="number" min="1">
+            </li>
+        </ul>
+    </form>
+
 </body>
 
 </html>
