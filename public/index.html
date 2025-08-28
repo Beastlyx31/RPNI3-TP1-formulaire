@@ -8,230 +8,225 @@
 
 <body>
     <!-- Section 1 -->
-    <h2>1. Choisir le montant du don</h2>
-    <form>
-        <fieldset>
-            <legend></legend>
+    <form action="merci.html">
+        <section>
+            <h2>1. Choisir le montant du don</h2>
 
             <input type="radio" id="donUnique" name="typeDon" value="unique" />
             <label for="donUnique">Don unique</label><br />
 
             <input type="radio" id="donMensuel" name="typeDon" value="mensuel" />
             <label for="donMensuel">Don mensuel</label><br />
-        </fieldset>
 
-        <ul>
-            <li>
-                <input type="radio" id="50" name="montantDonUnique" value="50">
-                <label for="50">50$</label>
-                <span>Vermifuger et micropucer un animal</span>
-            </li>
-            <li>
-                <input type="radio" id="100" name="montantDonUnique" value="100">
-                <label for="100">100$</label>
-                <span>Examiner et vacciner un chien</span>
-            </li>
-            <li>
-                <input type="radio" id="125$" name="montantDonUnique" value="125">
-                <label for="125">125$</label>
-                <span>Stériliser une chatte</span>
-            </li>
-            <li>
-                <input type="radio" id="200" name="montantDonUnique" value="200">
-                <label for="200">200$</label>
-                <span>Stériliser un chien</span>
-            </li>
-            <li>
-                <input type="radio" id="autreMontant" name="montantDonUnique" value="autreMontant">
-                <label for="autreMontant">Autre montant</label>
-            </li>
-            <li>
-                <input type="number" min="1">
-            </li>
-        </ul>
-        <!-- Span pour message erreur -->
-        <span></span>
 
-        <ul>
-            <li>
-                <input type="radio" id="20" name="montantDonMensuel" value="20">
-                <label for="20">20$</label>
-                <span>Nourrir un chat durant son séjour</span>
-            </li>
-            <li>
-                <input type="radio" id="35" name="montantDonMensuel" value="35">
-                <label for="35">35$</label>
-                <span>Fournir les repas et l’enrichissement à un chien durant son séjour</span>
-            </li>
-            <li>
-                <input type="radio" id="50" name="montantDonMensuel" value="50">
-                <label for="50">50$</label>
-                <span>Vermifuger et vacciner un animal</span>
-            </li>
-            <li>
-                <input type="radio" id="75" name="montantDonMensuel" value="75">
-                <label for="75">75$</label>
-                <span>Examiner et vacciner un animal</span>
-            </li>
-            <li>
-                <input type="radio" id="autreMontant" name="montantDonMensuel" value="autreMontant">
-                <label for="autreMontant">Autre montant</label>
-            </li>
-            <li>
-                <input type="number" min="1">
-            </li>
-        </ul>
-        <!-- Span pour message erreur -->
-        <span></span>
+            <ul>
+                <li>
+                    <input type="radio" id="50Unique" name="montantDonUnique" value="50">
+                    <label for="50Unique">50$</label>
+                    <span>Vermifuger et micropucer un animal</span>
+                </li>
+                <li>
+                    <input type="radio" id="100Unique" name="montantDonUnique" value="100">
+                    <label for="100Unique">100$</label>
+                    <span>Examiner et vacciner un chien</span>
+                </li>
+                <li>
+                    <input type="radio" id="125Unique" name="montantDonUnique" value="125">
+                    <label for="125Unique">125$</label>
+                    <span>Stériliser une chatte</span>
+                </li>
+                <li>
+                    <input type="radio" id="200Unique" name="montantDonUnique" value="200">
+                    <label for="200Unique">200$</label>
+                    <span>Stériliser un chien</span>
+                </li>
+                <li>
+                    <input type="radio" id="autreMontantUnique" name="montantDonUnique" value="autreMontant">
+                    <label for="autreMontant">Autre montant</label>
+                </li>
+                <li>
+                    <input type="number" min="1">
+                </li>
+            </ul>
+            <!-- Span pour message erreur -->
+            <span></span>
 
-        <fieldset>
-            <legend>Consacrer le don à un être cher ? </legend>
-            <input type="radio" id="oui" name="consacrerDon" value="O">
-            <label for="oui">Oui</label>
-            <input type="radio" id="non" name="consacrerDon" value="N">
-            <label for="non">Non</label>
-        </fieldset>
-        <!-- Span pour message erreur -->
-        <span></span>
-
-        <fieldset>
-            <legend> en l'honneur/en souvenir de </legend>
-            <label for="nom">Nom de l'être honoré</label>
-            <input type="text" id="nom" name="nom" required>
+            <ul>
+                <li>
+                    <input type="radio" id="20Mensuel" name="montantDonMensuel" value="20">
+                    <label for="20Mensuel">20$</label>
+                    <span>Nourrir un chat durant son séjour</span>
+                </li>
+                <li>
+                    <input type="radio" id="35Mensuel" name="montantDonMensuel" value="35">
+                    <label for="35Mensuel">35$</label>
+                    <span>Fournir les repas et l’enrichissement à un chien durant son séjour</span>
+                </li>
+                <li>
+                    <input type="radio" id="50Mensuel" name="montantDonMensuel" value="50">
+                    <label for="50Mensuel">50$</label>
+                    <span>Vermifuger et vacciner un animal</span>
+                </li>
+                <li>
+                    <input type="radio" id="75Mensuel" name="montantDonMensuel" value="75">
+                    <label for="75Mensuel">75$</label>
+                    <span>Examiner et vacciner un animal</span>
+                </li>
+                <li>
+                    <input type="radio" id="autreMontantMensuel" name="montantDonMensuel" value="autreMontant">
+                    <label for="autreMontant">Autre montant</label>
+                </li>
+                <li>
+                    <input type="number" min="1">
+                </li>
+            </ul>
             <!-- Span pour message erreur -->
             <span></span>
 
             <fieldset>
-                <legend>Notifier une personne ?</legend>
-                <input type="radio" id="oui" name="notifierPers" value="O">
-                <label for="oui">Oui</label>
-                <input type="radio" id="non" name="notifierPers" value="N">
-                <label for="non">Non</label>
+                <legend>Consacrer le don à un être cher ? </legend>
+                <input type="radio" id="ouiEtreCher" name="consacrerDon" value="O">
+                <label for="ouiEtreCher">Oui</label>
+                <input type="radio" id="nonEtreCher" name="consacrerDon" value="N">
+                <label for="nonEtreCher">Non</label>
+            </fieldset>
+            <!-- Span pour message erreur -->
+            <span></span>
+
+            <fieldset>
+                <legend> en l'honneur/en souvenir de </legend>
+                <label for="nom">Nom de l'être honoré</label>
+                <input type="text" id="nomEtreCher" name="nom" required>
                 <!-- Span pour message erreur -->
                 <span></span>
-                <div>
+
+                <fieldset>
+                    <legend>Notifier une personne ?</legend>
+                    <input type="radio" id="ouiNotifier" name="notifierPers" value="O">
+                    <label for="ouiNotifier">Oui</label>
+                    <input type="radio" id="nonNotifier" name="notifierPers" value="N">
+                    <label for="nonNotifier">Non</label>
+                    <!-- Span pour message erreur -->
+                    <span></span>
                     <div>
-                        <label for="nomPers">Nom de la personne</label>
-                        <input type="text" id="nomPers" name="nomPers" required>
-                        <!-- Span pour message erreur -->
-                        <span></span>
+                        <div>
+                            <label for="nomPers">Nom de la personne</label>
+                            <input type="text" id="nomPers" name="nomPers" required>
+                            <!-- Span pour message erreur -->
+                            <span></span>
+                        </div>
+                        <div>
+                            <label for="emailPers">Adresse courriel</label>
+                            <input type="email" id="emailPers" name="emailPers" required>
+                            <!-- Span pour message erreur -->
+                            <span></span>
+                            <!-- // -->
+                        </div>
                     </div>
-                    <div>
-                        <label for="emailPers">Adresse courriel</label>
-                        <input type="email" id="emailPers" name="emailPers" required>
-                        <!-- Span pour message erreur -->
-                        <span></span>
-                        <!-- // -->
-                    </div>
-                </div>
+                </fieldset>
             </fieldset>
-        </fieldset>
-    </form>
-    <!-- Section 2 -->
-    <h2>2. Informations personnels</h2>
-    <form action="">
-        <fieldset>
-            <legend>Faire ce don en tant ...</legend>
-            <input type="radio" id="personnel" name="personnel" value="personnel">
-            <label for="personnel">Personnel</label>
-            <input type="radio" id="entreprise" name="entreprise" value="entreprise">
-            <label for="entreprise">Entreprise</label>
-        </fieldset>
-        <!-- Span pour message erreur -->
-        <span></span>
-        <!-- // -->
-        <fieldset>
-            <!-- Pour le don entreprise uniquement -->
-            <label for="nomEntreprise">Nom de l'entreprise</label>
-            <input type="text" id="nomEntreprise" name="nomEntreprise" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
+        </section>
+        <!-- Section 2 -->
+        <section> 
+                <h2>2. Informations personnels</h2>
 
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" required>
+            <fieldset>
+                <legend>Faire ce don en tant ...</legend>
+                <input type="radio" id="personnel" name="personnel" value="personnel">
+                <label for="personnel">Personnel</label>
+                <input type="radio" id="entreprise" name="entreprise" value="entreprise">
+                <label for="entreprise">Entreprise</label>
+            </fieldset>
             <!-- Span pour message erreur -->
             <span></span>
             <!-- // -->
+            <fieldset>
+                <legend>Identification</legend>
+                <!-- Pour le don entreprise uniquement -->
+                <label for="nomEntreprise">Nom de l'entreprise</label>
+                <input type="text" id="nomEntreprise" name="nomEntreprise" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
 
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
 
-            <label for="email">Adresse courriel</label>
-            <input type="email" id="email" name="email" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
-        </fieldset>
-        <fieldset>
-            <label for="adresse">Adresse</label>
-            <input type="text" id="adresse" name="adresse" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
-            <label for="numApp">Numero appartement</label>
-            <input type="text" id="numApp" name="">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
 
-            <label for="codePostal">Code postal</label>
-            <input type="text" id="cp" name="cp" placeholder="A1B 2C3" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
+                <label for="email">Adresse courriel</label>
+                <input type="email" id="email" name="email" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
+            </fieldset>
+            <fieldset>
+                <legend>Adresse</legend>
+                <label for="adresse">Adresse</label>
+                <input type="text" id="adresse" name="adresse" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
+                <label for="numApp">Numero appartement</label>
+                <input type="text" id="numApp" name="">
 
-            <label for="ville">Ville</label>
-            <input type="text" id="ville" name="ville" required>
-            <!-- Span pour message erreur -->
-            <span></span>
-            <!-- // -->
+                <label for="codePostal">Code postal</label>
+                <input type="text" id="cp" name="cp" placeholder="A1B 2C3" maxlength="6" required>
+                <p>Exemple : A1B 2C3</p>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
 
-            <label for="province">Province</label>
-            <input list="provinces" >
-            <datalist id="provinces">
-                <option value="">--Choisissez votre province--</option>
-                <option value="alberta">Alberta</option>
-                <option value="cb">Colombie-Britannique</option>
-                <option value="idpe">Île-du-Prince-Édouard</option>
-                <option value="manitoba">Manitoba</option>
-                <option value="nunavut">Nunavut</option>
-                <option value="nb">Nouveau-Brunswick</option>
-                <option value="ne">Nouvelle-Écosse</option>
-                <option value="ontario">Ontario</option>
-                <option value="quebec">Québec</option>
-                <option value="saskatchewan">Saskatchewan</option>
-                <option value="tnel">Terre-Neuve-et-Labrador</option>
-                <option value="tdno">Territoires du Nord-Ouest</option>
-                <option value="yukon">Yukon</option>
-            </datalist>
-            <!-- <select name="province" id="province">
-                <option value="">--Choisissez votre province--</option>
-                <option value="alberta">Alberta</option>
-                <option value="cb">Colombie-Britannique</option>
-                <option value="idpe">Île-du-Prince-Édouard</option>
-                <option value="manitoba">Manitoba</option>
-                <option value="nunavut">Nunavut</option>
-                <option value="nb">Nouveau-Brunswick</option>
-                <option value="ne">Nouvelle-Écosse</option>
-                <option value="ontario">Ontario</option>
-                <option value="quebec">Québec</option>
-                <option value="saskatchewan">Saskatchewan</option>
-                <option value="tnel">Terre-Neuve-et-Labrador</option>
-                <option value="tdno">Territoires du Nord-Ouest</option>
-                <option value="yukon">Yukon</option>
-            </select> -->
-        </fieldset>
-    </form>
-    <h2>3. Paiement</h2>
-    <form action="merci.html">
-    <label for="numCarte">Numéro de carte de crédit</label>
-    <input type="text" id="numCarte" name="numCarte" required>
-    <label for="cvc">CVC</label>
-    <input type="text" name="cvc" id="cvc" required>
-    <label for="expirationCarte">Date d'expiration de la carte</label>
-    <input type="text" name="expirationCarte" id="expirationCarte" required>
-    <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $">
+                <label for="ville">Ville</label>
+                <input type="text" id="ville" name="ville" required>
+                <!-- Span pour message erreur -->
+                <span></span>
+                <!-- // -->
+
+                <label for="province">Province</label>
+                <input list="provinces">
+                <datalist id="provinces">
+                    <option value="">--Choisissez votre province--</option>
+                    <option value="alberta">Alberta</option>
+                    <option value="cb">Colombie-Britannique</option>
+                    <option value="idpe">Île-du-Prince-Édouard</option>
+                    <option value="manitoba">Manitoba</option>
+                    <option value="nunavut">Nunavut</option>
+                    <option value="nb">Nouveau-Brunswick</option>
+                    <option value="ne">Nouvelle-Écosse</option>
+                    <option value="ontario">Ontario</option>
+                    <option value="quebec">Québec</option>
+                    <option value="saskatchewan">Saskatchewan</option>
+                    <option value="tnel">Terre-Neuve-et-Labrador</option>
+                    <option value="tdno">Territoires du Nord-Ouest</option>
+                    <option value="yukon">Yukon</option>
+                </datalist>
+
+            </fieldset>
+        </section>
+
+        <section>
+            <h2>3. Paiement</h2>
+
+            <label for="numCarte">Numéro de carte de crédit</label>
+            <input type="text" id="numCarte" name="numCarte" maxlength="16" inputmode="numeric" required>
+            <label for="cvc">CVC</label>
+            <input type="text" name="cvc" id="cvc" maxlength="4" required>
+            <label for="expirationCarte">Date d'expiration de la carte</label>
+            <input type="month" name="expirationCarte" id="expirationCarte" required>
+            <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $">
+
+        </section>
+
+        <button>Précédent</button>
+        <button>Suivant</button>
     </form>
 
 </body>
