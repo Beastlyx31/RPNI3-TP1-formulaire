@@ -71,6 +71,7 @@ function naviguerSuivant() {
             btnSuivant?.classList.add("cacher");
         };
     }
+    
     // validerEtape(numEtape);
 
 }
