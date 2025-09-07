@@ -1,0 +1,51 @@
+{
+    "prenom": {
+        "vide": "Vous devez entrer votre prénom.",
+        "pattern": "Pour le prénom, les accents français, les espaces, les tirets et les apostrophes sont permis."
+    },
+    "nom": {
+        "vide": "Vous devez entrer votre nom de famille.",
+        "pattern": "Pour le nom de famille, les accents français, les espaces, les tirets et les apostrophes sont permis."
+    },
+    "nomEtreCher":{
+        "vide":"Vous devez entrer le nom de l'être chere"
+    },
+    "nomPers":{
+        "vide":"Vous devez entrer le nom de la personne à notifier"
+    },
+    "emailPers":{
+        "vide":"Vous devez entrer le courriel de la personne à notifier"
+    },
+    "email": {
+        "vide": "Vous devez entrer votre adresse courriel.",
+        "pattern": "Assurez-vous d'entrer une adresse courriel valide."
+    },
+    "codePostal":{
+        "vide": "Vous devez entrer un code postal",
+        "pattern":"Vous devez entrer un code postal valide"
+    },
+    "autreMontant":{
+        "vide": "Vous devez entrer un montant",
+        "pattern":"Vous devez entrer un chiffre entre 1 et 9999"
+    },
+    "adresse":{
+        "vide": "Vous devez entrer une adresse"
+    },
+    "province":{
+        "vide": "Vous devez choisir une province"
+    },
+    "ville":{
+        "vide": "Vous devez entrer le nom de votre ville"
+    },
+    "carteCredit":{
+        "vide": "Vous devez entrer le numéro de carte de crédit"
+    },
+    "cvc":{
+        "vide": "Vous devez entrer un numéro cvc"
+    },
+    "dateExpiration": {
+        "vide":
+        "Vous devez entrer la date d'expiration"
+    }
+
+}

@@ -4,132 +4,163 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/scripts.js"></script>
 </head>
 
 <body>
+    <nav aria-label="Étapes du formulaire de don">
+        <ol>
+            <li aria-current="step">
+                <a href="#">
+                    <span class="hors-ecran">Etape 1 - Don</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="hors-ecran">Etape 2 - Information personnel</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="hors-ecran">Etape 3 - Informations de paiement</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="hors-ecran">Etape 4 - Resumer du don</span>
+                </a>
+            </li>
+        </ol>
+    </nav>
     <!-- Section 1 -->
-    <form action="merci.html">
-        <section>
-            
-            <h2>1. Choisir le montant du don</h2>
+    <form action="merci.html" novalidate>
+        <section id="etape1">
 
-            <input type="radio" id="donUnique" name="typeDon" value="unique" />
-            <label for="donUnique">Don unique</label><br />
+            <fieldset role="radiogroup">
+                <legend>
+                    <h2>1. Choisir le montant du don</h2>
+                </legend>
 
-            <input type="radio" id="donMensuel" name="typeDon" value="mensuel" />
-            <label for="donMensuel">Don mensuel</label><br />
+                <input type="radio" id="donUnique" name="typeDon" value="unique" checked />
+                <label for="donUniqueLabel">Don unique</label><br />
+
+                <input type="radio" id="donMensuel" name="typeDon" value="mensuel" />
+                <label for="donMensuelLabel">Don mensuel</label><br />
+
+            </fieldset>
 
 
-            <ul>
-                <li>
-                    <input type="radio" id="50Unique" name="montantDonUnique" value="50">
-                    <label for="50Unique">50$</label>
-                    <span>Vermifuger et micropucer un animal</span>
-                </li>
-                <li>
-                    <input type="radio" id="100Unique" name="montantDonUnique" value="100">
-                    <label for="100Unique">100$</label>
-                    <span>Examiner et vacciner un chien</span>
-                </li>
-                <li>
-                    <input type="radio" id="125Unique" name="montantDonUnique" value="125">
-                    <label for="125Unique">125$</label>
-                    <span>Stériliser une chatte</span>
-                </li>
-                <li>
-                    <input type="radio" id="200Unique" name="montantDonUnique" value="200">
-                    <label for="200Unique">200$</label>
-                    <span>Stériliser un chien</span>
-                </li>
-                <li>
-                    <input type="radio" id="autreMontantUnique" name="montantDonUnique" value="autreMontant">
-                    <label for="autreMontant">Autre montant</label>
-                </li>
-                <li>
-                    <input type="number" min="1">
-                </li>
-            </ul>
-            <!-- Span pour message erreur -->
-            <span></span>
+            <fieldset role="radiogroup" aria-invalid="true" aria-describedby="errMontantDonUnique" required>
+                <legend>Choisir un montant</legend>
+                <ul id="listDonUnique">
+                    <li>
+                        <input type="radio" id="50Unique" name="montantDonUnique" value="50" checked>
+                        <label for="50Unique">50$</label>
+                        <span>Vermifuger et micropucer un animal</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="100Unique" name="montantDonUnique" value="100">
+                        <label for="100Unique">100$</label>
+                        <span>Examiner et vacciner un chien</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="125Unique" name="montantDonUnique" value="125">
+                        <label for="125Unique">125$</label>
+                        <span>Stériliser une chatte</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="200Unique" name="montantDonUnique" value="200">
+                        <label for="200Unique">200$</label>
+                        <span>Stériliser un chien</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="autreMontantUnique" name="montantDonUnique" value="autreMontant">
+                        <label for="autreMontantUnique">Autre montant</label>
+                    </li>
+                    <li>
+                        <input type="number" min="1" id="autreUnique">
+                        <span id="err-autreUnique" aria-live="polite"></span>
+                    </li>
+                </ul>
+         
 
-            <ul>
-                <li>
-                    <input type="radio" id="20Mensuel" name="montantDonMensuel" value="20">
-                    <label for="20Mensuel">20$</label>
-                    <span>Nourrir un chat durant son séjour</span>
-                </li>
-                <li>
-                    <input type="radio" id="35Mensuel" name="montantDonMensuel" value="35">
-                    <label for="35Mensuel">35$</label>
-                    <span>Fournir les repas et l’enrichissement à un chien durant son séjour</span>
-                </li>
-                <li>
-                    <input type="radio" id="50Mensuel" name="montantDonMensuel" value="50">
-                    <label for="50Mensuel">50$</label>
-                    <span>Vermifuger et vacciner un animal</span>
-                </li>
-                <li>
-                    <input type="radio" id="75Mensuel" name="montantDonMensuel" value="75">
-                    <label for="75Mensuel">75$</label>
-                    <span>Examiner et vacciner un animal</span>
-                </li>
-                <li>
-                    <input type="radio" id="autreMontantMensuel" name="montantDonMensuel" value="autreMontant">
-                    <label for="autreMontant">Autre montant</label>
-                </li>
-                <li>
-                    <input type="number" min="1">
-                </li>
-            </ul>
-            <!-- Span pour message erreur -->
-            <span></span>
+
+                <ul id="listDonMensuel">
+                    <li>
+                        <input type="radio" id="20Mensuel" name="montantDonMensuel" value="20" checked>
+                        <label for="20Mensuel">20$</label>
+                        <span>Nourrir un chat durant son séjour</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="35Mensuel" name="montantDonMensuel" value="35">
+                        <label for="35Mensuel">35$</label>
+                        <span>Fournir les repas et l’enrichissement à un chien durant son séjour</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="50Mensuel" name="montantDonMensuel" value="50">
+                        <label for="50Mensuel">50$</label>
+                        <span>Vermifuger et vacciner un animal</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="75Mensuel" name="montantDonMensuel" value="75">
+                        <label for="75Mensuel">75$</label>
+                        <span>Examiner et vacciner un animal</span>
+                    </li>
+                    <li>
+                        <input type="radio" id="autreMontantMensuel" name="montantDonMensuel" value="autreMontant">
+                        <label for="autreMontantMensuel">Autre montant</label>
+                    </li>
+                    <li>
+                        <input type="number" min="1" id="autreMensuel">
+                        <span id="err-autreMensuel" aria-live="polite"></span>
+                    </li>
+                </ul>
+            </fieldset>
 
             <fieldset>
                 <legend>Consacrer le don à un être cher ? </legend>
                 <input type="radio" id="ouiEtreCher" name="consacrerDon" value="O">
-                <label for="ouiEtreCher">Oui</label>
-                <input type="radio" id="nonEtreCher" name="consacrerDon" value="N">
-                <label for="nonEtreCher">Non</label>
+                <label for="ouiEtreCherLabel">Oui</label>
+                <input type="radio" id="nonEtreCher" name="consacrerDon" value="N" checked>
+                <label for="nonEtreCherLabel">Non</label>
             </fieldset>
-            <!-- Span pour message erreur -->
-            <span></span>
 
-            <fieldset>
+            <fieldset id="enHonneur">
                 <legend> en l'honneur/en souvenir de </legend>
                 <label for="nom">Nom de l'être honoré</label>
-                <input type="text" id="nomEtreCher" name="nom" required>
+                <input type="text" id="nomEtreCher" name="nom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\-]{1,}$" required>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="err-nomEtreCher" aria-live="polite"></span>
 
-                <fieldset>
-                    <legend>Notifier une personne ?</legend>
+
+                    <label for="notifierPers">Notifier une personne ?</label>
                     <input type="radio" id="ouiNotifier" name="notifierPers" value="O">
                     <label for="ouiNotifier">Oui</label>
-                    <input type="radio" id="nonNotifier" name="notifierPers" value="N">
+                    <input type="radio" id="nonNotifier" name="notifierPers" value="N" checked>
                     <label for="nonNotifier">Non</label>
-                    <!-- Span pour message erreur -->
-                    <span></span>
-                    <div>
+
+                    <div id="infoPersonneNotifier">
                         <div>
                             <label for="nomPers">Nom de la personne</label>
-                            <input type="text" id="nomPers" name="nomPers" required>
+                            <input type="text" id="nomPers" name="nomPers" aria-describedby="errNomPers"
+                                autocomplete="given-name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,}$" required>
                             <!-- Span pour message erreur -->
-                            <span></span>
+                            <span id="err-nomPers" role="alert" aria-live="polite"></span>
                         </div>
                         <div>
                             <label for="emailPers">Adresse courriel</label>
-                            <input type="email" id="emailPers" name="emailPers" required>
+                            <input type="email" id="emailPers" name="emailPers"
+                                aria-describedby="errEmailPers autocomplete=" email" required>
                             <!-- Span pour message erreur -->
-                            <span></span>
+                            <span id="err-emailPers" role="alert" aria-live="polite"></span>
                             <!-- // -->
                         </div>
                     </div>
-                </fieldset>
             </fieldset>
         </section>
         <!-- Section 2 -->
-        <section> 
-                <h2>2. Informations personnels</h2>
+        <section id="etape2">
+            <h2>2. Informations personnels</h2>
 
             <fieldset>
                 <legend>Faire ce don en tant ...</legend>
@@ -139,97 +170,121 @@
                 <label for="entreprise">Entreprise</label>
             </fieldset>
             <!-- Span pour message erreur -->
-            <span></span>
+            <span id="errDonEntantQue" aria-live="polite"></span>
             <!-- // -->
             <fieldset>
                 <legend>Identification</legend>
                 <!-- Pour le don entreprise uniquement -->
-                <label for="nomEntreprise">Nom de l'entreprise</label>
-                <input type="text" id="nomEntreprise" name="nomEntreprise" required>
+                <label for="nomEntreprise">Nom de l'entreprise</label><br>
+                <input type="text" id="nomEntreprise" name="nomEntreprise" aria-describedby="errNomEntreprise" required><br>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="errNomEntreprise" role="alert" aria-live="polite"></span><br>
                 <!-- // -->
 
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom" required>
+                <label for="prenom">Prénom</label><br>
+                <input type="text" id="prenom" name="prenom" aria-describedby="errPrenom" autocomplete="given-name"
+                    required><br>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="err-prenom" role="alert" aria-live="polite"></span><br>
                 <!-- // -->
 
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" required>
+                <label for="nom">Nom</label><br>
+                <input type="text" id="nom" name="nom" aria-describedby="errNom" autocomplete="family-name" required><br>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="err-nom" role="alert" aria-live="polite"></span><br>
                 <!-- // -->
 
-                <label for="email">Adresse courriel</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Adresse courriel</label><br>
+                <input type="email" id="email" name="email" aria-describedby="err-email" autocomplete="email" required><br>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="err-email" role="alert" aria-live="polite"></span><br>
                 <!-- // -->
             </fieldset>
             <fieldset>
                 <legend>Adresse</legend>
-                <label for="adresse">Adresse</label>
-                <input type="text" id="adresse" name="adresse" required>
+                <label for="adresse">Adresse</label><br>
+                <input type="text" id="adresse" name="adresse" aria-describedby="errAdresse"
+                    autocomplete="address-line1" required><br>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="err-adresse" role="alert" aria-live="polite"></span><br>
                 <!-- // -->
                 <label for="numApp">Numero appartement</label>
-                <input type="text" id="numApp" name="">
+                <input type="text" id="numApp" autocomplete="address-line2" name=""><br>
 
-                <label for="codePostal">Code postal</label>
-                <input type="text" id="cp" name="cp" placeholder="A1B 2C3" maxlength="6" required>
+                <label for="codePostal">Code postal</label><br>
+                <input type="text" id="codePostal" name="cp" placeholder="A1B 2C3" aria-describedby="errCodePostal"
+                    autocomplete="postal-code" maxlength="6" required><br>
                 <p>Exemple : A1B 2C3</p>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="errCodePostal" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
                 <label for="ville">Ville</label>
-                <input type="text" id="ville" name="ville" required>
+                <input type="text" id="ville" name="ville" aria-describedby="errVille" required>
                 <!-- Span pour message erreur -->
-                <span></span>
+                <span id="errVille" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
                 <label for="province">Province</label>
-                <input list="provinces">
-                <datalist id="provinces">
+                <input type="text" list="provincesListe" name="province" id="province" aria-describedby="errProvince">
+                <datalist id="provincesListe">
                     <option value="">--Choisissez votre province--</option>
-                    <option value="alberta">Alberta</option>
-                    <option value="cb">Colombie-Britannique</option>
-                    <option value="idpe">Île-du-Prince-Édouard</option>
-                    <option value="manitoba">Manitoba</option>
-                    <option value="nunavut">Nunavut</option>
-                    <option value="nb">Nouveau-Brunswick</option>
-                    <option value="ne">Nouvelle-Écosse</option>
-                    <option value="ontario">Ontario</option>
-                    <option value="quebec">Québec</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Colombie-Britannique">Colombie-Britannique</option>
+                    <option value="Île-du-Prince-Édouard">Île-du-Prince-Édouard</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Nunavut">Nunavut</option>
+                    <option value="Nouveau-Brunswick">Nouveau-Brunswick</option>
+                    <option value="Nouvelle-Écosse">Nouvelle-Écosse</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Québec">Québec</option>
                     <option value="saskatchewan">Saskatchewan</option>
-                    <option value="tnel">Terre-Neuve-et-Labrador</option>
-                    <option value="tdno">Territoires du Nord-Ouest</option>
-                    <option value="yukon">Yukon</option>
+                    <option value="Terre-Neuve-et-Labrador">Terre-Neuve-et-Labrador</option>
+                    <option value="Territoires du Nord-Ouest">Territoires du Nord-Ouest</option>
+                    <option value="Yukon">Yukon</option>
                 </datalist>
+
+                <!-- Span pour message erreur -->
+                <span id="errProvince" role="alert" aria-live="polite"></span>
 
             </fieldset>
         </section>
 
-        <section>
+        <section id="etape3">
             <h2>3. Paiement</h2>
 
             <label for="numCarte">Numéro de carte de crédit</label>
-            <input type="text" id="numCarte" name="numCarte" maxlength="16" inputmode="numeric" required>
+            <input type="text" id="numCarte" name="numCarte" maxlength="16" inputmode="numeric"
+                aria-describedby="errNumCarte" autocomplete="cc-number" required>
+
+            <!-- Span pour message erreur -->
+            <span id="errNumCarte" role="alert" aria-live="polite"></span>
+
+
             <label for="cvc">CVC</label>
-            <input type="text" name="cvc" id="cvc" maxlength="4" required>
+            <input type="text" name="cvc" id="cvc" maxlength="4" aria-describedby="errCvc" autocomplete="cc-csc"
+                required>
+
+            <!-- Span pour message erreur -->
+            <span id="errCvc" role="alert" aria-live="polite"></span>
+
+
             <label for="expirationCarte">Date d'expiration de la carte</label>
-            <input type="month" name="expirationCarte" id="expirationCarte" required>
+            <input type="month" name="expirationCarte" id="expirationCarte" aria-describedby="errNumCarte"
+                autocomplete="cc-exp" required>
+
+            <!-- Span pour message erreur -->
+            <span id="errNumCarte" role="alert" aria-live="polite"></span>
+
+
             <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $">
 
         </section>
 
-        <button>Précédent</button>
-        <button>Suivant</button>
-    </form>
+        <button type="button" id="btnPrecedent">Précédent</button>
+        <button type="button" id="btnSuivant">Suivant</button>
 
+    </form>
 </body>
 
 </html>
