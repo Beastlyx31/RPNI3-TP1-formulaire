@@ -4,53 +4,63 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/gfd8dao.css">
     <script defer src="js/scripts.js"></script>
+    <title>Formulaire de don Coeur de patte</title>
 </head>
 
 <body>
-    <nav aria-label="Étapes du formulaire de don">
-        <ol>
-            <li aria-current="step">
-                <a href="#">
-                    <span class="hors-ecran">Etape 1 - Don</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="hors-ecran">Etape 2 - Information personnel</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="hors-ecran">Etape 3 - Informations de paiement</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="hors-ecran">Etape 4 - Resumer du don</span>
-                </a>
-            </li>
-        </ol>
-    </nav>
+    <header>
+        <h1>Patte de coeur</h1>
+    </header>
+  <nav class="etapes">
+    <ol class="nav__liste">
+        <li>
+            <a class="etapes__item etapes__item--active" aria-current="step" href="#etape1">
+              <span class="cacher">Étape 1 de 4</span>
+              Don
+            </a>
+        </li>
+        <li>
+            <a class="etapes__item etapes__item--inactive" aria-disabled="true" href="#etape2">
+              <span class="cacher">Étape 2 de 4</span>
+              Coordonnées
+            </a>
+        </li>
+        <li>
+            <a class="etapes__item etapes__item--inactive" aria-disabled="true" href="#etape3">
+              <span class="cacher">Étape 3 de 4</span>
+              Paiement
+            </a>
+        </li>
+        <li>
+            <a class="etapes__item etapes__item--inactive" aria-disabled="true" href="#etape4">
+              <span class="cacher">Étape 4 de 4</span>
+              Résumé
+            </a>
+        </li>
+    </ol>
+</nav>
+
     <!-- Section 1 -->
     <form action="merci.html" novalidate>
         <section id="etape1">
 
-            <fieldset role="radiogroup">
+            <fieldset class="BtnChoix" role="radiogroup">
                 <legend>
                     <h2>1. Choisir le montant du don</h2>
                 </legend>
 
                 <input type="radio" id="donUnique" name="typeDon" value="unique" checked />
-                <label for="donUniqueLabel">Don unique</label><br />
+                <label for="donUnique">Don unique</label>
 
                 <input type="radio" id="donMensuel" name="typeDon" value="mensuel" />
-                <label for="donMensuelLabel">Don mensuel</label><br />
+                <label for="donMensuel">Don mensuel</label>
 
             </fieldset>
 
 
-            <fieldset role="radiogroup" aria-invalid="true" aria-describedby="errMontantDonUnique" required>
+            <fieldset role="radiogroup" aria-invalid="true">
                 <legend>Choisir un montant</legend>
                 <ul id="listDonUnique">
                     <li>
@@ -78,11 +88,11 @@
                         <label for="autreMontantUnique">Autre montant</label>
                     </li>
                     <li>
-                        <input type="number" min="1" id="autreUnique">
-                        <span id="err-autreUnique" aria-live="polite"></span>
+                        <input type="number" min="1" id="autreUnique" aria-describedby="err-autreUnique">
+                        <span class="erreur" id="err-autreUnique" aria-live="polite"></span>
                     </li>
                 </ul>
-         
+
 
 
                 <ul id="listDonMensuel">
@@ -112,7 +122,7 @@
                     </li>
                     <li>
                         <input type="number" min="1" id="autreMensuel">
-                        <span id="err-autreMensuel" aria-live="polite"></span>
+                        <span class="erreur" id="err-autreMensuel" aria-live="polite"></span>
                     </li>
                 </ul>
             </fieldset>
@@ -120,42 +130,41 @@
             <fieldset>
                 <legend>Consacrer le don à un être cher ? </legend>
                 <input type="radio" id="ouiEtreCher" name="consacrerDon" value="O">
-                <label for="ouiEtreCherLabel">Oui</label>
+                <label for="ouiEtreCher">Oui</label>
                 <input type="radio" id="nonEtreCher" name="consacrerDon" value="N" checked>
-                <label for="nonEtreCherLabel">Non</label>
+                <label for="nonEtreCher">Non</label>
             </fieldset>
 
             <fieldset id="enHonneur">
                 <legend> en l'honneur/en souvenir de </legend>
-                <label for="nom">Nom de l'être honoré</label>
-                <input type="text" id="nomEtreCher" name="nom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\-]{1,}$" required>
+                <label for="nomEtreCher">Nom de l'être honoré</label>
+                <input type="text" id="nomEtreCher" name="nom" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\-]{1,}$" disabled required>
                 <!-- Span pour message erreur -->
-                <span id="err-nomEtreCher" aria-live="polite"></span>
+                <span class="erreur" id="err-nomEtreCher" aria-live="polite"></span>
 
+                <p>Notifier une personne ?</p>
+                <input type="radio" id="ouiNotifier" name="notifierPers" value="O">
+                <label for="ouiNotifier">Oui</label>
+                <input type="radio" id="nonNotifier" name="notifierPers" value="N" checked>
+                <label for="nonNotifier">Non</label>
 
-                    <label for="notifierPers">Notifier une personne ?</label>
-                    <input type="radio" id="ouiNotifier" name="notifierPers" value="O">
-                    <label for="ouiNotifier">Oui</label>
-                    <input type="radio" id="nonNotifier" name="notifierPers" value="N" checked>
-                    <label for="nonNotifier">Non</label>
-
-                    <div id="infoPersonneNotifier">
-                        <div>
-                            <label for="nomPers">Nom de la personne</label>
-                            <input type="text" id="nomPers" name="nomPers" aria-describedby="errNomPers"
-                                autocomplete="given-name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,}$" required>
-                            <!-- Span pour message erreur -->
-                            <span id="err-nomPers" role="alert" aria-live="polite"></span>
-                        </div>
-                        <div>
-                            <label for="emailPers">Adresse courriel</label>
-                            <input type="email" id="emailPers" name="emailPers"
-                                aria-describedby="errEmailPers autocomplete=" email" required>
-                            <!-- Span pour message erreur -->
-                            <span id="err-emailPers" role="alert" aria-live="polite"></span>
-                            <!-- // -->
-                        </div>
+                <div id="infoPersonneNotifier">
+                    <div>
+                        <label for="nomPers">Nom de la personne</label>
+                        <input type="text" id="nomPers" name="nomPers" aria-describedby="err-nomPers"
+                            autocomplete="given-name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,}$" disabled required>
+                        <!-- Span pour message erreur -->
+                        <span class="erreur" id="err-nomPers" role="alert" aria-live="polite"></span>
                     </div>
+                    <div>
+                        <label for="emailPers">Adresse courriel</label>
+                        <input type="email" id="emailPers" name="emailPers" aria-describedby="err-emailPers"
+                            autocomplete="email" disabled required>
+                        <!-- Span pour message erreur -->
+                        <span class="erreur" id="err-emailPers" role="alert" aria-live="polite"></span>
+                        <!-- // -->
+                    </div>
+                </div>
             </fieldset>
         </section>
         <!-- Section 2 -->
@@ -164,9 +173,9 @@
 
             <fieldset>
                 <legend>Faire ce don en tant ...</legend>
-                <input type="radio" id="personnel" name="personnel" value="personnel">
+                <input type="radio" id="personnel" name="enTantQue" value="personnel" checked>
                 <label for="personnel">Personnel</label>
-                <input type="radio" id="entreprise" name="entreprise" value="entreprise">
+                <input type="radio" id="entreprise" name="enTantQue" value="entreprise">
                 <label for="entreprise">Entreprise</label>
             </fieldset>
             <!-- Span pour message erreur -->
@@ -175,58 +184,61 @@
             <fieldset>
                 <legend>Identification</legend>
                 <!-- Pour le don entreprise uniquement -->
-                <label for="nomEntreprise">Nom de l'entreprise</label><br>
-                <input type="text" id="nomEntreprise" name="nomEntreprise" aria-describedby="errNomEntreprise" required><br>
+                <label for="nomEntreprise">Nom de l'entreprise</label>
+                <input type="text" id="nomEntreprise" name="nomEntreprise" aria-describedby="err-nomEntreprise" disabled
+                    required>
                 <!-- Span pour message erreur -->
-                <span id="errNomEntreprise" role="alert" aria-live="polite"></span><br>
+                <span class="erreur" id="err-nomEntreprise" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
-                <label for="prenom">Prénom</label><br>
-                <input type="text" id="prenom" name="prenom" aria-describedby="errPrenom" autocomplete="given-name"
-                    required><br>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" aria-describedby="err-prenom" autocomplete="given-name"
+                    required>
                 <!-- Span pour message erreur -->
-                <span id="err-prenom" role="alert" aria-live="polite"></span><br>
+                <span class="erreur" id="err-prenom" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
-                <label for="nom">Nom</label><br>
-                <input type="text" id="nom" name="nom" aria-describedby="errNom" autocomplete="family-name" required><br>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" aria-describedby="err-nom" autocomplete="family-name"
+                    required>
                 <!-- Span pour message erreur -->
-                <span id="err-nom" role="alert" aria-live="polite"></span><br>
+                <span class="erreur" id="err-nom" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
-                <label for="email">Adresse courriel</label><br>
-                <input type="email" id="email" name="email" aria-describedby="err-email" autocomplete="email" required><br>
+                <label for="email">Adresse courriel</label>
+                <input type="email" id="email" name="email" aria-describedby="err-email" autocomplete="email"
+                    required>
                 <!-- Span pour message erreur -->
-                <span id="err-email" role="alert" aria-live="polite"></span><br>
+                <span class="erreur" id="err-email" role="alert" aria-live="polite"></span>
                 <!-- // -->
             </fieldset>
             <fieldset>
                 <legend>Adresse</legend>
-                <label for="adresse">Adresse</label><br>
-                <input type="text" id="adresse" name="adresse" aria-describedby="errAdresse"
-                    autocomplete="address-line1" required><br>
+                <label for="adresse">Adresse</label>
+                <input type="text" id="adresse" name="adresse" aria-describedby="err-adresse"
+                    autocomplete="address-line1" required>
                 <!-- Span pour message erreur -->
-                <span id="err-adresse" role="alert" aria-live="polite"></span><br>
+                <span class="erreur" id="err-adresse" role="alert" aria-live="polite"></span>
                 <!-- // -->
                 <label for="numApp">Numero appartement</label>
-                <input type="text" id="numApp" autocomplete="address-line2" name=""><br>
+                <input type="text" id="numApp" autocomplete="address-line2" name="adresse2">
 
-                <label for="codePostal">Code postal</label><br>
-                <input type="text" id="codePostal" name="cp" placeholder="A1B 2C3" aria-describedby="errCodePostal"
-                    autocomplete="postal-code" maxlength="6" required><br>
+                <label for="codePostal">Code postal</label>
+                <input type="text" id="codePostal" name="cp" placeholder="A1B 2C3" aria-describedby="err-codePostal"
+                    autocomplete="postal-code" maxlength="6" required>
                 <p>Exemple : A1B 2C3</p>
                 <!-- Span pour message erreur -->
-                <span id="errCodePostal" role="alert" aria-live="polite"></span>
+                <span class="erreur" id="err-codePostal" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
                 <label for="ville">Ville</label>
-                <input type="text" id="ville" name="ville" aria-describedby="errVille" required>
+                <input type="text" id="ville" name="ville" aria-describedby="err-ville" required>
                 <!-- Span pour message erreur -->
-                <span id="errVille" role="alert" aria-live="polite"></span>
+                <span class="erreur" id="err-ville" role="alert" aria-live="polite"></span>
                 <!-- // -->
 
                 <label for="province">Province</label>
-                <input type="text" list="provincesListe" name="province" id="province" aria-describedby="errProvince">
+                <input type="text" list="provincesListe" name="province" id="province" aria-describedby="err-province">
                 <datalist id="provincesListe">
                     <option value="">--Choisissez votre province--</option>
                     <option value="Alberta">Alberta</option>
@@ -245,7 +257,7 @@
                 </datalist>
 
                 <!-- Span pour message erreur -->
-                <span id="errProvince" role="alert" aria-live="polite"></span>
+                <span class="erreur" id="err-province" role="alert" aria-live="polite"></span>
 
             </fieldset>
         </section>
@@ -255,29 +267,30 @@
 
             <label for="numCarte">Numéro de carte de crédit</label>
             <input type="text" id="numCarte" name="numCarte" maxlength="16" inputmode="numeric"
-                aria-describedby="errNumCarte" autocomplete="cc-number" required>
+                aria-describedby="err-numCarte" autocomplete="cc-number" required>
 
             <!-- Span pour message erreur -->
-            <span id="errNumCarte" role="alert" aria-live="polite"></span>
+            <span class="erreur" id="err-numCarte" role="alert" aria-live="polite"></span>
 
 
             <label for="cvc">CVC</label>
-            <input type="text" name="cvc" id="cvc" maxlength="4" aria-describedby="errCvc" autocomplete="cc-csc"
+            <input type="text" name="cvc" id="cvc" maxlength="4" aria-describedby="err-cvc" autocomplete="cc-csc"
                 required>
 
             <!-- Span pour message erreur -->
-            <span id="errCvc" role="alert" aria-live="polite"></span>
+            <span class="erreur" id="err-cvc" role="alert" aria-live="polite"></span>
 
 
             <label for="expirationCarte">Date d'expiration de la carte</label>
-            <input type="month" name="expirationCarte" id="expirationCarte" aria-describedby="errNumCarte"
+            <input type="month" name="expirationCarte" id="expirationCarte" aria-describedby="err-expirationCarte"
                 autocomplete="cc-exp" required>
 
             <!-- Span pour message erreur -->
-            <span id="errNumCarte" role="alert" aria-live="polite"></span>
+            <span class="erreur" id="err-expirationCarte" role="alert" aria-live="polite"></span>
 
 
-            <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $">
+            <button type="submit" name="envoyerDon" id="envoyerDon">Faire un don de 'x' $</button>
+            <!-- <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $"> -->
 
         </section>
 

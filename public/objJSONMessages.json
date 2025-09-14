@@ -18,7 +18,9 @@
     },
     "email": {
         "vide": "Vous devez entrer votre adresse courriel.",
-        "pattern": "Assurez-vous d'entrer une adresse courriel valide."
+        "pattern": "Assurez-vous d'entrer une adresse courriel valide.",
+        "tldSuspicieux": "Attention, certains domaine sont interdit",
+        "erreursCommune": "Voulez vous dire {domaine}?"
     },
     "codePostal":{
         "vide": "Vous devez entrer un code postal",
@@ -37,15 +39,14 @@
     "ville":{
         "vide": "Vous devez entrer le nom de votre ville"
     },
-    "carteCredit":{
+    "numCarte":{
         "vide": "Vous devez entrer le numéro de carte de crédit"
     },
     "cvc":{
         "vide": "Vous devez entrer un numéro cvc"
     },
-    "dateExpiration": {
-        "vide":
-        "Vous devez entrer la date d'expiration"
+    "expirationCarte": {
+        "vide": "Vous devez entrer la date d'expiration"
     }
 
 }

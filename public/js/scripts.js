@@ -16,6 +16,12 @@ let montantDonMensuel = document.getElementById("listDonMensuel");
 let consacrerDon = document.getElementById("enHonneur");
 let infoPersonneNotifier = document.getElementById("infoPersonneNotifier");
 let inputAutreUnique = document.getElementById("autreUnique");
+const btnEnvoyer = document.getElementById("envoyerDon");
+// CHAMPS
+const NomEtreCher = document.getElementById('nomEtreCher');
+const nomPersNotifier = document.getElementById("nomPers");
+const emailPersNotifier = document.getElementById("emailPers");
+const nomEntreprise = document.getElementById("nomEntreprise");
 // VARIABLE BTN RADIOS
 let btnRadioDonUnique = document.getElementById("donUnique");
 let btnRadioDonMensuel = document.getElementById("donMensuel");
@@ -24,6 +30,8 @@ let btnRadioConsacrerNON = document.getElementById("nonEtreCher");
 let btnRadioOuiNotifier = document.getElementById("ouiNotifier");
 let btnRadioNonNotifier = document.getElementById("nonNotifier");
 let btnRadioAutreUnique = document.getElementById('autreMontantUnique');
+let btnRadioEntreprise = document.getElementById("entreprise");
+let btnRadioPerso = document.getElementById("personnel");
 // EVENTLISTENER
 window.addEventListener("load", initialiser);
 btnSuivant?.addEventListener("click", naviguerSuivant);
@@ -35,6 +43,9 @@ btnRadioConsacrerOUI?.addEventListener("click", validerBtnRadio);
 btnRadioOuiNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioNonNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioAutreUnique?.addEventListener("click", validerBtnRadio);
+btnRadioEntreprise?.addEventListener("click", validerBtnRadio);
+btnRadioPerso?.addEventListener("click", validerBtnRadio);
+btnEnvoyer?.addEventListener("click", validerEnvoieDon);
 function initialiser() {
     etape2?.classList.add("cacher");
     etape3?.classList.add("cacher");
@@ -47,18 +58,19 @@ function initialiser() {
     obtenirMessage();
 }
 function naviguerSuivant() {
-    console.log(numEtape);
-    afficherEtape(numEtape);
-    if (validerEtape(numEtape) != true) {
+    validerEtape(numEtape);
+    if (validerEtape(numEtape) == false) {
     }
     else {
         numEtape++;
+        afficherEtape(numEtape);
         if (numEtape == 0) {
             btnSuivant?.classList.remove("cacher");
         }
         ;
         if (numEtape == 1) {
             btnPrecedent?.classList.remove("cacher");
+            validerBtnRadio();
         }
         ;
         if (numEtape == 2) {
@@ -70,7 +82,6 @@ function naviguerSuivant() {
 }
 function naviguerPrecedent() {
     numEtape--;
-    console.log(numEtape);
     afficherEtape(numEtape);
     if (numEtape == 1) {
         btnPrecedent?.classList.remove("cacher");
@@ -103,16 +114,15 @@ async function obtenirMessage() {
     //     })
     messagesJson = await reponse.json();
     //  reponse.then(()=>)
-    console.log(messagesJson);
 }
 function validerChamp(champ) {
     let valide = false;
     const id = champ.id;
     const idMessageErreur = "err-" + id;
     const erreurElement = document.getElementById(idMessageErreur);
-    console.log('valider champ', champ.validity);
+    // console.log('valider champ', champ.validity);
     if (champ.validity.valueMissing && messagesJson[id].vide) {
-        console.log('erreur', id);
+        // console.log('erreur', id);
         valide = false;
         erreurElement.innerText = messagesJson[id].vide;
     }
@@ -124,19 +134,80 @@ function validerChamp(champ) {
         valide = false;
         erreurElement.innerText = messagesJson[id].pattern;
     }
+    else {
+        valide = true;
+        erreurElement.innerText = "";
+    }
+    return valide;
+}
+function validerEmail(champ) {
+    let valide = false;
+    const id = champ.id;
+    const idMessageErreur = "err-" + id;
+    const erreurElement = document.getElementById(idMessageErreur);
+    const leEmail = champ.value;
+    const tldSuspicieux = [
+        ".ru",
+        ".cn",
+        ".click",
+        ".party",
+    ];
+    const erreursCommune = {
+        'hotnail': 'hotmail',
+        'gnail': 'gmail'
+    };
+    if (champ.validity.valueMissing && messagesJson[id].vide) {
+        // console.log('erreur', id);
+        valide = false;
+        erreurElement.innerText = messagesJson[id].vide;
+    }
+    else if (champ.validity.typeMismatch && messagesJson[id].type) {
+        valide = false;
+        erreurElement.innerText = messagesJson[id].type;
+    }
+    else if (champ.validity.patternMismatch && messagesJson[id].pattern) {
+        valide = false;
+        erreurElement.innerText = messagesJson[id].pattern;
+    }
+    else if (tldSuspicieux.some((tld => {
+        const contientSuspect = leEmail.toLowerCase().endsWith(tld);
+        return contientSuspect;
+    }))) {
+        valide = false;
+    }
+    else {
+        const valeursCles = Object.keys(erreursCommune);
+        const erreurCle = valeursCles.find((domaine) => {
+            return leEmail.toLowerCase().includes(domaine);
+        });
+        console.log(erreurCle);
+        if (erreurCle) {
+            const domaineCorrect = erreursCommune[erreurCle];
+            const monMessage = messagesJson[id].erreursCommune.replace("{domaine}", domaineCorrect);
+            valide = false;
+            erreurElement.innerText = monMessage;
+        }
+        else {
+            erreurElement.innerText = "";
+            valide = true;
+        }
+    }
     return valide;
 }
 function validerEtape(etape) {
     let etapeValide = false;
     switch (etape) {
         case 0:
-            const NomEtreCher = document.getElementById('nomEtreCher');
             const NomEtreCherValide = validerChamp(NomEtreCher);
-            if (!NomEtreCher) {
+            const nomPersNotifierValide = validerChamp(nomPersNotifier);
+            const emailPersNotifierValide = validerEmail(emailPersNotifier);
+            if (NomEtreCherValide == false || !nomPersNotifierValide || !emailPersNotifierValide) {
                 etapeValide = false;
             }
             else {
                 etapeValide = true;
+                // const refLienEtape = document.getElementById("liste-Item_Lien0");
+                // refLienEtape?.setAttribute("href","#etape1")  
             }
             break;
         case 1:
@@ -144,11 +215,31 @@ function validerEtape(etape) {
             const prenomElement = document.getElementById('prenom');
             const emailElement = document.getElementById('email');
             const adresseElement = document.getElementById('adresse');
+            const codePostal = document.getElementById('codePostal');
+            const ville = document.getElementById('ville');
+            const province = document.getElementById('province');
             const nomValide = validerChamp(nomElement);
             const prenomValide = validerChamp(prenomElement);
-            const emailValide = validerChamp(emailElement);
+            const emailValide = validerEmail(emailElement);
             const adresseValide = validerChamp(adresseElement);
-            if (!nomValide || !prenomValide || !emailValide || !adresseValide) {
+            const codePostalValide = validerChamp(codePostal);
+            const villeValide = validerChamp(ville);
+            const provinceValide = validerChamp(province);
+            if (!nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
+                etapeValide = false;
+            }
+            else {
+                etapeValide = true;
+            }
+            break;
+        case 2:
+            const numCarte = document.getElementById('numCarte');
+            const cvc = document.getElementById("cvc");
+            const expirationCarte = document.getElementById("expirationCarte");
+            const numCarteValide = validerChamp(numCarte);
+            const cvcValide = validerChamp(cvc);
+            const expirationCarteValide = validerChamp(expirationCarte);
+            if (!numCarteValide || !cvcValide || !expirationCarteValide) {
                 etapeValide = false;
             }
             else {
@@ -159,7 +250,6 @@ function validerEtape(etape) {
     return etapeValide;
 }
 function validerBtnRadio() {
-    console.log("testValiderBTn");
     if (btnRadioDonMensuel.checked) {
         montantDonMensuel?.classList.remove("cacher");
         montantDonUnique?.classList.add("cacher");
@@ -173,18 +263,32 @@ function validerBtnRadio() {
     }
     if (btnRadioConsacrerOUI.checked) {
         consacrerDon?.classList.remove("cacher");
+        NomEtreCher.disabled = false;
     }
     if (btnRadioNonNotifier.checked) {
         infoPersonneNotifier?.classList.add("cacher");
     }
     if (btnRadioOuiNotifier.checked) {
         infoPersonneNotifier?.classList.remove("cacher");
+        nomPersNotifier.disabled = false;
+        emailPersNotifier.disabled = false;
+    }
+    if (btnRadioPerso.checked) {
+        nomEntreprise?.classList.add("cacher");
+    }
+    if (btnRadioEntreprise.checked) {
+        nomEntreprise?.classList.remove("cacher");
+        nomEntreprise.disabled = false;
     }
     if (btnRadioAutreUnique.checked) {
-        console.log("test Autre montant");
         inputAutreUnique?.classList.remove("cacher");
     }
     else if (!btnRadioAutreUnique.checked) {
         inputAutreUnique?.classList.add("cacher");
+    }
+}
+function validerEnvoieDon(event) {
+    if (!validerEtape(numEtape)) {
+        event.preventDefault();
     }
 }

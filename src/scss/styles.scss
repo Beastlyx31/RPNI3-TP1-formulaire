@@ -42,10 +42,14 @@
 @use "base/hyperlien";
 @use "base/typo";
 @use "base/grille";
+@use "base/affichage";
+
 
 /** MODULES **/
-.cacher{
-    display: none;
+@use "modules/nav.scss";
+
+#orteil1{
+    fill: aqua;
 }
 
 

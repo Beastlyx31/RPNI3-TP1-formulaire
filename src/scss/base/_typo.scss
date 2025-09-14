@@ -2,7 +2,7 @@
 @use "../utilitaires/variables";
 
 /**
-* @author Prenom Nom courriel
+* @author Alyson Grondin Brochu
 * @todo Préciser l’interlignage sur le body pour l’écran large
 * @todo Utiliser le mixin fontSize pour définir les tailles de polices
 * @todo Utiliser une variable pour la media query de la règle body
@@ -84,4 +84,7 @@ h3,
   &--desktop {
     line-height: 1.5;
   }
+}
+.erreur {
+  color: red;
 }

@@ -10,13 +10,13 @@
 
 /** Polices de caractères **/
 
-@font-face {
-  font-family: Futura, sans-serif;
-  src: 	url('../fonts/Futura.ttc') format('truetype');
-}
+// @font-face {
+//   font-family: Futura, sans-serif;
+//   src: 	url('../fonts/Futura.ttc') format('truetype');
+// }
 
-$fontePrimaire : Futura, sans-serif;
-$fonteSecondaire : Arial, sans-serif;
+$fontePrimaire : transat-text, sans-serif;
+$fonteSecondaire : costa, sans-serif;
 
 /** Palette de couleurs **/
 // Utiliser http://chir.ag/projects/name-that-color pour obtenir des noms uniques et mémorisables
