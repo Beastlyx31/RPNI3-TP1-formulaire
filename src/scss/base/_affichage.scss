@@ -1,11 +1,79 @@
-.cacher{
+@use "sass:color";
+@use "../utilitaires/variables";
+
+.cacher {
     display: none;
-};
-.BtnChoix{
+}
+
+.BtnChoix {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    margin: 0;
 }
-body{
+
+.listeDon {
+    list-style: none;
+}
+
+.champ-colonne {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+input {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    // transition: border-color 0.2s;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+input[type="text"] input[type="number"] {
+    width: 100%;
+}
+
+input[type="radio"] {
+    opacity: 0%;
+}
+
+.listeDon {
+    margin: 0;
+    padding: 0;
+
+    >li {
+        padding-bottom: 20px;
+    }
+
+    // li:last-child input[type="number"] {
+    //     width: 100%;
+    // }
+}
+
+input[type="radio"]+label {
+    padding: 10px;
+    border-radius: 10px;
+    outline: black solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+input[type="radio"]:checked+label {
+    background-color: variables.$bleuMoyen;
+}
+
+body {
     max-width: 100%;
+}
+
+header{
+    background-color:variables.$bleuPaleTransparent;
+}
+
+.logo{
+    width: 30%;
+    display: block;
+    margin: 0 auto;
+    padding-top: 20px;
 }

@@ -8,13 +8,20 @@
         "pattern": "Pour le nom de famille, les accents français, les espaces, les tirets et les apostrophes sont permis."
     },
     "nomEtreCher":{
-        "vide":"Vous devez entrer le nom de l'être chere"
+        "vide":"Vous devez entrer le nom de l'être chere",
+        "pattern":"Pour le nom de famille, les accents français, les espaces, les tirets et les apostrophes sont permis."
+    },
+     "nomEntreprise":{
+        "vide":"Vous devez entrer le nom de l'entreprise",
+        "pattern":"Pour le nom d'entreprise, les accents français, les espaces, les tirets, les chiffres et les apostrophes sont permis."
     },
     "nomPers":{
-        "vide":"Vous devez entrer le nom de la personne à notifier"
+        "vide":"Vous devez entrer le nom de la personne à notifier",
+        "pattern":"Pour le prénom, les accents français, les espaces, les tirets et les apostrophes sont permis."
     },
     "emailPers":{
-        "vide":"Vous devez entrer le courriel de la personne à notifier"
+        "vide":"Vous devez entrer le courriel de la personne à notifier",
+        "pattern":"Assurez-vous d'entrer une adresse courriel valide."
     },
     "email": {
         "vide": "Vous devez entrer votre adresse courriel.",
