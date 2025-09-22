@@ -15,10 +15,10 @@
         <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.37 74.37">
             <path id="coeur"
                 d="M37.08 33.68c6.19 2.26 19.05 7.58 23.68 12.06 2.82 2.73 5.51 9.36 2.9 13.86-2.79 4.8-8.31 8.59-17.35 4.07-4.93 8.82-11.62 8.79-16.63 6.39-4.69-2.25-6.19-9.24-5.39-13.09 1.3-6.31 8.95-17.93 12.8-23.29Z" />
-            <ellipse  cx="61.65" cy="26.12" rx="6.52" ry="11.77" transform="rotate(-17.11 61.635 26.13)" />
-            <ellipse  cx="40.15" cy="14.49" rx="6.52" ry="11.77" transform="rotate(-17.11 40.136 14.501)" />
-            <ellipse  cx="23.78" cy="19.53" rx="6.52" ry="11.77" transform="rotate(-17.11 23.78 19.518)" />
-            <ellipse  cx="10.75" cy="40.26" rx="6.52" ry="11.77" transform="rotate(-17.11 10.734 40.261)" />
+            <ellipse cx="61.65" cy="26.12" rx="6.52" ry="11.77" transform="rotate(-17.11 61.635 26.13)" />
+            <ellipse cx="40.15" cy="14.49" rx="6.52" ry="11.77" transform="rotate(-17.11 40.136 14.501)" />
+            <ellipse cx="23.78" cy="19.53" rx="6.52" ry="11.77" transform="rotate(-17.11 23.78 19.518)" />
+            <ellipse cx="10.75" cy="40.26" rx="6.52" ry="11.77" transform="rotate(-17.11 10.734 40.261)" />
         </svg>
         <h1>Patte de coeur</h1>
     </header>
@@ -71,15 +71,17 @@
             </ol>
         </nav>
 
-        <!-- Section 1 -->
+        <!-- Début du formulaire de don principal -->
         <form action="merci.html">
+            <!-- Section 1 : Choix du type et du montant du don -->
             <section id="etape1">
-
+                <!-- Fieldset pour le choix du type de don (unique ou mensuel) -->
                 <fieldset class="BtnChoix" role="radiogroup">
                     <legend>
                         <h2>1. Choisir le montant du don</h2>
                     </legend>
 
+                    <!-- Boutons radio pour le type de don -->
                     <input type="radio" id="donUnique" name="typeDon" value="unique" checked />
                     <label for="donUnique">Don unique</label>
 
@@ -88,9 +90,11 @@
 
                 </fieldset>
 
-
+                <!-- Fieldset pour le choix du montant -->
                 <fieldset role="radiogroup" aria-invalid="true">
                     <legend>Choisir un montant</legend>
+
+                    <!-- Liste des montants prédéfinis et option autre montant -->
                     <ul class="listeDon" id="listDonUnique">
                         <li class="listeDon__item">
                             <input type="radio" id="50Unique" name="montantDonUnique" value="50" checked>
@@ -171,7 +175,7 @@
                     <legend> en l'honneur/en souvenir de </legend>
                     <div class="champ-colonne">
                         <label for="nomEtreCher">Nom de l'être honoré</label>
-                        <input type="text" id="nomEtreCher" name="nom" pattern="^[a-zA-ZÀ-ÿ-]+$" disabled required>
+                        <input type="text" id="nomEtreCher" name="nom" pattern="^[a-zA-ZÀ-ÿ]+$" disabled required>
                         <!-- Span pour message erreur -->
                         <span class="erreur" id="err-nomEtreCher" aria-live="polite"></span>
                     </div>
@@ -186,7 +190,7 @@
                         <div>
                             <label for="nomPers">Nom de la personne</label>
                             <input type="text" id="nomPers" name="nomPers" aria-describedby="err-nomPers"
-                                autocomplete="given-name" pattern="^[a-zA-ZÀ-ÿ-]+$" disabled required>
+                                autocomplete="given-name" pattern="^[a-zA-ZÀ-ÿ]+$" disabled required>
                             <!-- Span pour message erreur -->
                             <span class="erreur" id="err-nomPers" role="alert" aria-live="polite"></span>
                         </div>
@@ -202,10 +206,12 @@
                     </div>
                 </fieldset>
             </section>
-            <!-- Section 2 -->
+
+            <!-- Section 2 : Informations personnelles -->
             <section id="etape2">
                 <h2>2. Informations personnels</h2>
 
+                <!-- Fieldset pour le type de donateur (personnel ou entreprise) -->
                 <fieldset>
                     <legend>Faire ce don en tant ...</legend>
                     <input type="radio" id="personnel" name="enTantQue" value="personnel" checked>
@@ -216,26 +222,27 @@
                 <!-- Span pour message erreur -->
                 <span id="errDonEntantQue" aria-live="polite"></span>
                 <!-- // -->
+                <!-- Fieldset pour l'identification du donateur -->
                 <fieldset>
                     <legend>Identification</legend>
                     <!-- Pour le don entreprise uniquement -->
                     <label for="nomEntreprise">Nom de l'entreprise</label>
                     <input type="text" id="nomEntreprise" name="nomEntreprise" aria-describedby="err-nomEntreprise"
-                       pattern="^[a-zA-ZÀ-ÿ0-9-]+$" disabled required>
+                        pattern="^[a-zA-ZÀ-ÿ0-9]+$" disabled required>
                     <!-- Span pour message erreur -->
                     <span class="erreur" id="err-nomEntreprise" role="alert" aria-live="polite"></span>
                     <!-- // -->
 
                     <label for="prenom">Prénom</label>
                     <input type="text" id="prenom" name="prenom" aria-describedby="err-prenom" autocomplete="given-name"
-                        pattern="^[a-zA-ZÀ-ÿ-]+$" required>
+                        pattern="^[a-zA-ZÀ-ÿ]+$" required>
                     <!-- Span pour message erreur -->
                     <span class="erreur" id="err-prenom" role="alert" aria-live="polite"></span>
                     <!-- // -->
 
                     <label for="nom">Nom</label>
                     <input type="text" id="nom" name="nom" aria-describedby="err-nom" autocomplete="family-name"
-                      pattern="^[a-zA-ZÀ-ÿ-]+$"   required>
+                        pattern="^[a-zA-ZÀ-ÿ]+$" required>
                     <!-- Span pour message erreur -->
                     <span class="erreur" id="err-nom" role="alert" aria-live="polite"></span>
                     <!-- // -->
@@ -299,9 +306,10 @@
                 </fieldset>
             </section>
 
+            <!-- Section 3 : Paiement -->
             <section id="etape3">
                 <h2>3. Paiement</h2>
-
+                <!-- Champs pour les informations de paiement -->
                 <label for="numCarte">Numéro de carte de crédit</label>
                 <input type="text" id="numCarte" name="numCarte" maxlength="16" inputmode="numeric"
                     aria-describedby="err-numCarte" autocomplete="cc-number"
@@ -326,22 +334,25 @@
                 <!-- Span pour message erreur -->
                 <span class="erreur" id="err-expirationCarte" role="alert" aria-live="polite"></span>
             </section>
+
+            <!-- Section 4 : Résumé -->
             <section id="etape4">
                 <h2>4. Résumé</h2>
+                <!-- Récapitulatif du don et informations saisies -->
                 <h3>Votre don est d'un montant de <span id="montantDon"></span></h3>
                 <h3>Vos informations </h3>
-                <p>Prenom : <span></span></p>
+                <p>Prenom : <span id="resumePrenom"></span></p>
 
-                <button type="submit" name="envoyerDon" id="envoyerDon">Faire un don de <span id="montantDonBtn"></span>
-                    $</button>
-                <!-- <input type="submit" name="envoyerDon" id="envoyerDon" value="Faire un don de 'x' $"> -->
+                <button type="submit" name="envoyerDon" id="envoyerDon">Faire un don de <span id="montantDonBtn"></span>$</button>
 
             </section>
-
+            <!-- Boutons de navigation entre les étapes -->
             <button type="button" id="btnPrecedent">Précédent</button>
             <button type="button" id="btnSuivant">Suivant</button>
 
         </form>
+        <!-- Fin du formulaire de don principal -->
+
     </main>
 </body>
 

@@ -1,24 +1,24 @@
-const btnPrecedent: HTMLElement | null = document.getElementById("btnPrecedent");
-const btnSuivant: HTMLElement | null = document.getElementById("btnSuivant");
+// ETAPES
 const etape1: HTMLElement | null = document.getElementById("etape1");
 const etape2: HTMLElement | null = document.getElementById("etape2");
 const etape3: HTMLElement | null = document.getElementById("etape3");
 const etape4: HTMLElement | null = document.getElementById("etape4");
-
-
-let etapes = document.querySelectorAll("section");
+const etapes = document.querySelectorAll("section");
 let numEtape: number = 0;
+
+// BOUTONS NAVIGATION
+const btnPrecedent: HTMLElement | null = document.getElementById("btnPrecedent");
+const btnSuivant: HTMLElement | null = document.getElementById("btnSuivant");
+
+
 let messagesJson: any = null;
-let montantDonUnique = document.getElementById("listDonUnique") as HTMLInputElement;
-let montantDonMensuel = document.getElementById("listDonMensuel") as HTMLInputElement;
-let consacrerDon = document.getElementById("enHonneur") as HTMLInputElement;
-let infoPersonneNotifier = document.getElementById("infoPersonneNotifier") as HTMLInputElement;
-let inputAutreUnique = document.getElementById("autreUnique") as HTMLInputElement;
-let inputAutreMensuel = document.getElementById("autreMensuel") as HTMLInputElement;
-const btnEnvoyer = document.getElementById("envoyerDon") as HTMLInputElement;
+// MONTANT DON
+const montantDonUnique = document.getElementById("listDonUnique") as HTMLInputElement;
+const montantDonMensuel = document.getElementById("listDonMensuel") as HTMLInputElement;
+
+// PARTIE CACHER FORMULAIRE
 let estCacher = true;
 let estCacherFormulaire2 = true;
-const champMontantDon = document.getElementById("montantDonBtn") as HTMLElement;
 
 // CHAMPS
 const NomEtreCher = document.getElementById('nomEtreCher') as HTMLInputElement;
@@ -26,23 +26,30 @@ const nomPersNotifier = document.getElementById("nomPers") as HTMLInputElement;
 const emailPersNotifier = document.getElementById("emailPers") as HTMLInputElement;
 const nomEntreprise = document.getElementById("nomEntreprise") as HTMLInputElement;
 const labelNomEntreprise = document.querySelector('label[for="nomEntreprise"]');
+const champMontantDon = document.getElementById("montantDonBtn") as HTMLElement;
+const infoPersonneNotifier = document.getElementById("infoPersonneNotifier") as HTMLInputElement;
+const inputAutreUnique = document.getElementById("autreUnique") as HTMLInputElement;
+const inputAutreMensuel = document.getElementById("autreMensuel") as HTMLInputElement;
+const champsPrenomResumer = document.getElementById("resumePrenom") as HTMLElement;
 
+// FORMULAIRE
+const formulaire = document.querySelector("form") as HTMLFormElement;
+const btnEnvoyer = document.getElementById("envoyerDon") as HTMLInputElement;
+const etiquetteDonUnique = document.querySelectorAll("#listDonUnique > div");
 
-
-// VARIABLE BTN RADIOS
-let btnRadioDonUnique: any = document.getElementById("donUnique");
-let btnRadioDonMensuel: any = document.getElementById("donMensuel");
-let btnRadioConsacrerOUI: any = document.getElementById("ouiEtreCher");
-let btnRadioConsacrerNON: any = document.getElementById("nonEtreCher");
-let btnRadioOuiNotifier: any = document.getElementById("ouiNotifier");
-let btnRadioNonNotifier: any = document.getElementById("nonNotifier");
-let btnRadioAutreUnique: any = document.getElementById('autreMontantUnique');
-let btnRadioEntreprise: any = document.getElementById("entreprise");
-let btnRadioPerso: any = document.getElementById("personnel");
+// BTN RADIOS
+const btnRadioDonUnique: any = document.getElementById("donUnique");
+const btnRadioDonMensuel: any = document.getElementById("donMensuel");
+const btnRadioConsacrerOUI: any = document.getElementById("ouiEtreCher");
+const btnRadioConsacrerNON: any = document.getElementById("nonEtreCher");
+const btnRadioOuiNotifier: any = document.getElementById("ouiNotifier");
+const btnRadioNonNotifier: any = document.getElementById("nonNotifier");
+const btnRadioAutreUnique: any = document.getElementById('autreMontantUnique');
+const btnRadioEntreprise: any = document.getElementById("entreprise");
+const btnRadioPerso: any = document.getElementById("personnel");
 const radiosMontantUnique = document.querySelectorAll('input[type="radio"][name="montantDonUnique"]');
 const radiosMontantMensuel = document.querySelectorAll('input[type="radio"][name="montantDonMensuel"]');
-const etiquetteDonUnique = document.querySelectorAll("#listDonUnique > div");
-const formulaire = document.querySelector("form") as HTMLFormElement;
+const consacrerDon = document.getElementById("enHonneur") as HTMLInputElement;
 
 
 // EVENTLISTENER
@@ -62,6 +69,8 @@ btnEnvoyer?.addEventListener("click", validerEnvoieDon);
 inputAutreMensuel.addEventListener("change", obtenirAutreMontant);
 inputAutreUnique.addEventListener("change", obtenirAutreMontant);
 
+// BOUCLES
+// Pour chaque boutons radios ont attributs un eventListener
 radiosMontantUnique.forEach(btnradio => {
     btnradio.addEventListener("click", obtenirAutreMontant);
 });
@@ -71,7 +80,8 @@ radiosMontantMensuel.forEach(btnradio => {
 
 
 
-
+// FUNCTIONS
+// Initialise le formulaire en cachant les parties ulterieur et en affichant uniquement le btn suivant.
 function initialiser() {
     etape2?.classList.add("cacher");
     etape3?.classList.add("cacher");
@@ -86,11 +96,14 @@ function initialiser() {
     obtenirMessage();
     formulaire.noValidate = true;
 }
+
+// Permet la navigation en effectuant la validation de l'étape en cours. 
 function naviguerSuivant() {
     validerEtape(numEtape);
     if (validerEtape(numEtape) == false) {
     } else {
 
+        // incrémente le numêro d'êtape.
         numEtape++;
         afficherEtape(numEtape);
 
@@ -102,14 +115,14 @@ function naviguerSuivant() {
             btnPrecedent?.classList.remove("cacher");
             validerBtnRadio();
         };
-
         if (numEtape == 3) {
             btnSuivant?.classList.add("cacher");
+
         };
     }
 }
 
-
+// Permet la navigation à l'étape précédente et gère l'affiche des boutons selon le numéro d'étape. 
 function naviguerPrecedent() {
     numEtape--;
     afficherEtape(numEtape);
@@ -125,8 +138,11 @@ function naviguerPrecedent() {
     if (numEtape == 3) {
         btnSuivant?.classList.add("cacher");
 
+
     }
 }
+
+// Permet d'afficher uniquement l'étape du formulaire qui correspond au numéro
 function afficherEtape(numEtape: number) {
     etapes.forEach((etape, index) => {
         if (index == numEtape) {
@@ -138,24 +154,18 @@ function afficherEtape(numEtape: number) {
     });
 };
 
+// Permet d'obtenir les messages d'erreurs dans l'objet JSON
 async function obtenirMessage() {
     const reponse = await fetch('objJSONMessages.json')
-    //  au lieu de :
-    //     const reponse = fetch('objJSONMessages.json')
-    //     reponse.then(()=>{
-    //     })
-
     messagesJson = await reponse.json();
-    //  reponse.then(()=>)
 }
 
+// Permet de valider si le champs est compléter et de vérifier si le pattern est respecter, sinon affiche le message d'erreur.
 function validerChamp(champ: HTMLInputElement): boolean {
     let valide = false;
     const id = champ.id;
     const idMessageErreur = "err-" + id;
     const erreurElement: any = document.getElementById(idMessageErreur);
-
-
 
     if (champ.validity.valueMissing && messagesJson[id].vide) {
 
@@ -178,6 +188,7 @@ function validerChamp(champ: HTMLInputElement): boolean {
     return valide;
 }
 
+// Permet de valider l'email en s'assurant qu'il n'est pas vide, que le pattern correspond et que l'extension soit accepté.
 function validerEmail(champ: HTMLInputElement) {
     let valide = false;
     const id = champ.id;
@@ -241,9 +252,10 @@ function validerEmail(champ: HTMLInputElement) {
     return valide;
 
 }
+
+// Permet de s'assurer que tout les champs sont valide afin de valider l'étape en cours. 
 function validerEtape(etape: number): boolean {
     let etapeValide = false;
-
 
     switch (etape) {
         case 0:
@@ -252,23 +264,17 @@ function validerEtape(etape: number): boolean {
             const emailPersNotifierValide = validerEmail(emailPersNotifier);
 
             if (estCacher === true && estCacherFormulaire2 === true) {
-                console.log("tout cacher = valide ")
                 etapeValide = true;
             } else if (!NomEtreCherValide) {
                 etapeValide = false;
-                console.log("nom pas correct = invalide ")
             } else if (estCacherFormulaire2 === false) {
-                console.log("form 2 afficher")
-
                 if (!nomPersNotifierValide || !emailPersNotifierValide) {
                     etapeValide = false;
-                    console.log("1 des 2 champs est pas valide = Invalide")
                 } else {
                     etapeValide = true;
                 }
             } else {
                 etapeValide = true;
-                console.log("tout est good !")
             }
             break;
 
@@ -290,16 +296,21 @@ function validerEtape(etape: number): boolean {
             const provinceValide = validerChamp(province);
             const nomEntrepriseValide = validerChamp(nomEntreprise);
 
-            if (nomEntreprise.disabled = false) {
+            if (nomEntreprise.disabled == true) {
+                console.log("valider PERSO")
+                console.log(nomEntreprise.disabled);
                 if (!nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 } else {
                     etapeValide = true;
+                    afficherInformationsResumer(prenomElement.value);
                 }
             } else {
+                console.log("valider ENTREPRISE")
+                console.log(nomEntreprise.disabled);
                 if (!nomEntrepriseValide || !nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
-                }else {
+                } else {
                     etapeValide = true;
                 }
             }
@@ -325,15 +336,16 @@ function validerEtape(etape: number): boolean {
     return etapeValide;
 }
 
-
+// Permet de valider quel parti du formulaire afficher en fonctions du bouton radio sélectionner
 function validerBtnRadio() {
 
+    // Si le btn radio de don mensuel est sélectionner, ont cache la liste des dons uniques.
     if (btnRadioDonMensuel.checked) {
         montantDonMensuel?.classList.remove("cacher");
         montantDonUnique?.classList.add("cacher");
         afficherChampsAutre();
-
     }
+    // Si le btn radio de don unique est sélectionner, ont cache la liste des dons mensuels.
     if (btnRadioDonUnique.checked) {
         montantDonMensuel?.classList.add("cacher");
         montantDonUnique?.classList.remove("cacher");
@@ -351,7 +363,6 @@ function validerBtnRadio() {
         consacrerDon?.classList.remove("cacher");
         NomEtreCher.disabled = false;
         estCacher = false;
-        console.log(estCacher);
 
     }
     if (btnRadioNonNotifier.checked) {
@@ -368,7 +379,8 @@ function validerBtnRadio() {
         nomEntreprise?.classList.add("cacher");
         labelNomEntreprise?.classList.add("cacher");
         nomEntreprise.disabled = true;
-
+        const msgErreurNomEntreprise = document.getElementById("err-nomEntreprise") as HTMLElement;
+        msgErreurNomEntreprise.innerText = "";
 
     }
     if (btnRadioEntreprise.checked) {
@@ -378,6 +390,8 @@ function validerBtnRadio() {
     }
 
 }
+
+// Permet d'afficher et de cacher le champs "Autre montant" correspondant au type de don sélectionner. 
 function afficherChampsAutre() {
 
     const dernierRadioUnique = radiosMontantUnique[radiosMontantUnique.length - 1] as HTMLInputElement;
@@ -402,9 +416,8 @@ function afficherChampsAutre() {
     }
 }
 
+// Permet d'obtenir la valeur entrée dans le champs autre montant.
 function obtenirAutreMontant(event: any) {
-    console.log(event.currentTarget.value);
-    // console.log(inputAutreMensuel.innerHTML);
     let valeurMontant = event.currentTarget.value;
     if (event.currentTarget.value == "autreMontant") {
         valeurMontant = inputAutreMensuel.innerText;
@@ -413,6 +426,11 @@ function obtenirAutreMontant(event: any) {
     }
 }
 
+function afficherInformationsResumer(value :string){
+    champsPrenomResumer.innerText = value;
+}
+
+// Permet de valider que toutes les étapes ont été valider afin de permettre l'envoie du formulaire. 
 function validerEnvoieDon(event: any) {
     if (numEtape < 3) {
         event.preventDefault();
