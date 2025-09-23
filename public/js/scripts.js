@@ -1,4 +1,5 @@
 "use strict";
+const etapeNav = document.querySelectorAll("nav>ol>li");
 // ETAPES
 const etape1 = document.getElementById("etape1");
 const etape2 = document.getElementById("etape2");
@@ -6,9 +7,19 @@ const etape3 = document.getElementById("etape3");
 const etape4 = document.getElementById("etape4");
 const etapes = document.querySelectorAll("section");
 let numEtape = 0;
+let derniereEtapeValidee = 0;
 // BOUTONS NAVIGATION
 const btnPrecedent = document.getElementById("btnPrecedent");
 const btnSuivant = document.getElementById("btnSuivant");
+// SVG
+const svgEtape1 = document.querySelector('nav>ol>li:first-child svg');
+const svgEtape2 = document.querySelector('nav>ol>li:nth-child(2) svg');
+const orteil1 = document.getElementById("orteil1");
+const orteil2 = document.getElementById("orteil2");
+const orteil3 = document.getElementById("orteil3");
+const orteil4 = document.getElementById("orteil4");
+const arrSvgPatte = document.querySelectorAll('nav>ol>li>svg.patte');
+console.log(arrSvgPatte);
 let messagesJson = null;
 // MONTANT DON
 const montantDonUnique = document.getElementById("listDonUnique");
@@ -39,11 +50,15 @@ const btnRadioConsacrerNON = document.getElementById("nonEtreCher");
 const btnRadioOuiNotifier = document.getElementById("ouiNotifier");
 const btnRadioNonNotifier = document.getElementById("nonNotifier");
 const btnRadioAutreUnique = document.getElementById('autreMontantUnique');
+const btnRadioAutreMensuel = document.getElementById('autreMontantMensuel');
 const btnRadioEntreprise = document.getElementById("entreprise");
 const btnRadioPerso = document.getElementById("personnel");
 const radiosMontantUnique = document.querySelectorAll('input[type="radio"][name="montantDonUnique"]');
 const radiosMontantMensuel = document.querySelectorAll('input[type="radio"][name="montantDonMensuel"]');
 const consacrerDon = document.getElementById("enHonneur");
+// const arrMontantDonUnique = Array.from(radiosMontantUnique);
+// const arrMontantDonMensuel = Array.from(radiosMontantMensuel);
+// const arrMontants = arrMontantDonMensuel.concat(arrMontantDonUnique);
 // EVENTLISTENER
 window.addEventListener("load", initialiser);
 btnSuivant?.addEventListener("click", naviguerSuivant);
@@ -55,6 +70,7 @@ btnRadioConsacrerOUI?.addEventListener("click", validerBtnRadio);
 btnRadioOuiNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioNonNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioAutreUnique?.addEventListener("click", validerBtnRadio);
+btnRadioAutreMensuel?.addEventListener("click", validerBtnRadio);
 btnRadioEntreprise?.addEventListener("click", validerBtnRadio);
 btnRadioPerso?.addEventListener("click", validerBtnRadio);
 btnEnvoyer?.addEventListener("click", validerEnvoieDon);
@@ -81,6 +97,9 @@ function initialiser() {
     infoPersonneNotifier?.classList.add("cacher");
     inputAutreUnique?.classList.add("cacher");
     inputAutreMensuel.classList.add("cacher");
+    arrSvgPatte[1].classList.add("patte--disabled");
+    arrSvgPatte[2].classList.add("patte--disabled");
+    arrSvgPatte[3].classList.add("patte--disabled");
     obtenirMessage();
     formulaire.noValidate = true;
 }
@@ -120,6 +139,9 @@ function naviguerPrecedent() {
         btnPrecedent?.classList.remove("cacher");
         btnSuivant?.classList.remove("cacher");
     }
+    if (numEtape == 2) {
+        btnSuivant?.classList.remove("cacher");
+    }
     if (numEtape == 3) {
         btnSuivant?.classList.add("cacher");
     }
@@ -129,6 +151,7 @@ function afficherEtape(numEtape) {
     etapes.forEach((etape, index) => {
         if (index == numEtape) {
             etape.classList.remove("cacher");
+            arrSvgPatte[index].classList.remove("patte--disabled");
         }
         else {
             etape.classList.add("cacher");
@@ -267,8 +290,6 @@ function validerEtape(etape) {
             const provinceValide = validerChamp(province);
             const nomEntrepriseValide = validerChamp(nomEntreprise);
             if (nomEntreprise.disabled == true) {
-                console.log("valider PERSO");
-                console.log(nomEntreprise.disabled);
                 if (!nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 }
@@ -278,8 +299,6 @@ function validerEtape(etape) {
                 }
             }
             else {
-                console.log("valider ENTREPRISE");
-                console.log(nomEntreprise.disabled);
                 if (!nomEntrepriseValide || !nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 }
@@ -295,6 +314,7 @@ function validerEtape(etape) {
             const numCarteValide = validerChamp(numCarte);
             const cvcValide = validerChamp(cvc);
             const expirationCarteValide = validerChamp(expirationCarte);
+            console.log(numCarteValide);
             if (!numCarteValide || !cvcValide || !expirationCarteValide) {
                 etapeValide = false;
             }
@@ -323,7 +343,6 @@ function validerBtnRadio() {
         consacrerDon?.classList.add("cacher");
         estCacher = true;
         NomEtreCher.disabled = true;
-        console.log(estCacher);
     }
     if (btnRadioConsacrerOUI.checked) {
         consacrerDon?.classList.remove("cacher");

@@ -1,3 +1,5 @@
+const etapeNav = document.querySelectorAll("nav>ol>li");
+
 // ETAPES
 const etape1: HTMLElement | null = document.getElementById("etape1");
 const etape2: HTMLElement | null = document.getElementById("etape2");
@@ -5,10 +7,24 @@ const etape3: HTMLElement | null = document.getElementById("etape3");
 const etape4: HTMLElement | null = document.getElementById("etape4");
 const etapes = document.querySelectorAll("section");
 let numEtape: number = 0;
+let derniereEtapeValidee = 0;
+
 
 // BOUTONS NAVIGATION
 const btnPrecedent: HTMLElement | null = document.getElementById("btnPrecedent");
 const btnSuivant: HTMLElement | null = document.getElementById("btnSuivant");
+
+// SVG
+const svgEtape1 = document.querySelector('nav>ol>li:first-child svg');
+const svgEtape2 = document.querySelector('nav>ol>li:nth-child(2) svg')
+const orteil1 = document.getElementById("orteil1");
+const orteil2 = document.getElementById("orteil2");
+const orteil3 = document.getElementById("orteil3");
+const orteil4 = document.getElementById("orteil4");
+
+const arrSvgPatte = document.querySelectorAll('nav>ol>li>svg.patte');
+console.log(arrSvgPatte);
+
 
 
 let messagesJson: any = null;
@@ -19,6 +35,8 @@ const montantDonMensuel = document.getElementById("listDonMensuel") as HTMLInput
 // PARTIE CACHER FORMULAIRE
 let estCacher = true;
 let estCacherFormulaire2 = true;
+
+
 
 // CHAMPS
 const NomEtreCher = document.getElementById('nomEtreCher') as HTMLInputElement;
@@ -37,6 +55,7 @@ const formulaire = document.querySelector("form") as HTMLFormElement;
 const btnEnvoyer = document.getElementById("envoyerDon") as HTMLInputElement;
 const etiquetteDonUnique = document.querySelectorAll("#listDonUnique > div");
 
+
 // BTN RADIOS
 const btnRadioDonUnique: any = document.getElementById("donUnique");
 const btnRadioDonMensuel: any = document.getElementById("donMensuel");
@@ -45,12 +64,16 @@ const btnRadioConsacrerNON: any = document.getElementById("nonEtreCher");
 const btnRadioOuiNotifier: any = document.getElementById("ouiNotifier");
 const btnRadioNonNotifier: any = document.getElementById("nonNotifier");
 const btnRadioAutreUnique: any = document.getElementById('autreMontantUnique');
+const btnRadioAutreMensuel: any = document.getElementById('autreMontantMensuel');
 const btnRadioEntreprise: any = document.getElementById("entreprise");
 const btnRadioPerso: any = document.getElementById("personnel");
 const radiosMontantUnique = document.querySelectorAll('input[type="radio"][name="montantDonUnique"]');
 const radiosMontantMensuel = document.querySelectorAll('input[type="radio"][name="montantDonMensuel"]');
 const consacrerDon = document.getElementById("enHonneur") as HTMLInputElement;
 
+// const arrMontantDonUnique = Array.from(radiosMontantUnique);
+// const arrMontantDonMensuel = Array.from(radiosMontantMensuel);
+// const arrMontants = arrMontantDonMensuel.concat(arrMontantDonUnique);
 
 // EVENTLISTENER
 window.addEventListener("load", initialiser);
@@ -63,6 +86,8 @@ btnRadioConsacrerOUI?.addEventListener("click", validerBtnRadio);
 btnRadioOuiNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioNonNotifier?.addEventListener("click", validerBtnRadio);
 btnRadioAutreUnique?.addEventListener("click", validerBtnRadio);
+btnRadioAutreMensuel?.addEventListener("click", validerBtnRadio);
+
 btnRadioEntreprise?.addEventListener("click", validerBtnRadio);
 btnRadioPerso?.addEventListener("click", validerBtnRadio);
 btnEnvoyer?.addEventListener("click", validerEnvoieDon);
@@ -79,7 +104,6 @@ radiosMontantMensuel.forEach(btnradio => {
 });
 
 
-
 // FUNCTIONS
 // Initialise le formulaire en cachant les parties ulterieur et en affichant uniquement le btn suivant.
 function initialiser() {
@@ -93,6 +117,10 @@ function initialiser() {
     infoPersonneNotifier?.classList.add("cacher");
     inputAutreUnique?.classList.add("cacher");
     inputAutreMensuel.classList.add("cacher");
+    arrSvgPatte[1].classList.add("patte--disabled")
+    arrSvgPatte[2].classList.add("patte--disabled")
+    arrSvgPatte[3].classList.add("patte--disabled")
+
     obtenirMessage();
     formulaire.noValidate = true;
 }
@@ -134,7 +162,9 @@ function naviguerPrecedent() {
         btnPrecedent?.classList.remove("cacher");
         btnSuivant?.classList.remove("cacher");
     }
-
+    if (numEtape == 2) {
+        btnSuivant?.classList.remove("cacher");
+    }
     if (numEtape == 3) {
         btnSuivant?.classList.add("cacher");
 
@@ -147,6 +177,8 @@ function afficherEtape(numEtape: number) {
     etapes.forEach((etape, index) => {
         if (index == numEtape) {
             etape.classList.remove("cacher");
+            arrSvgPatte[index].classList.remove("patte--disabled")
+
         }
         else {
             etape.classList.add("cacher");
@@ -263,6 +295,7 @@ function validerEtape(etape: number): boolean {
             const nomPersNotifierValide = validerChamp(nomPersNotifier);
             const emailPersNotifierValide = validerEmail(emailPersNotifier);
 
+
             if (estCacher === true && estCacherFormulaire2 === true) {
                 etapeValide = true;
             } else if (!NomEtreCherValide) {
@@ -275,6 +308,7 @@ function validerEtape(etape: number): boolean {
                 }
             } else {
                 etapeValide = true;
+
             }
             break;
 
@@ -297,8 +331,6 @@ function validerEtape(etape: number): boolean {
             const nomEntrepriseValide = validerChamp(nomEntreprise);
 
             if (nomEntreprise.disabled == true) {
-                console.log("valider PERSO")
-                console.log(nomEntreprise.disabled);
                 if (!nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 } else {
@@ -306,8 +338,6 @@ function validerEtape(etape: number): boolean {
                     afficherInformationsResumer(prenomElement.value);
                 }
             } else {
-                console.log("valider ENTREPRISE")
-                console.log(nomEntreprise.disabled);
                 if (!nomEntrepriseValide || !nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 } else {
@@ -325,6 +355,7 @@ function validerEtape(etape: number): boolean {
             const cvcValide = validerChamp(cvc);
             const expirationCarteValide = validerChamp(expirationCarte);
 
+            console.log(numCarteValide);
             if (!numCarteValide || !cvcValide || !expirationCarteValide) {
                 etapeValide = false;
             } else {
@@ -356,7 +387,6 @@ function validerBtnRadio() {
         consacrerDon?.classList.add("cacher");
         estCacher = true;
         NomEtreCher.disabled = true;
-        console.log(estCacher);
 
     }
     if (btnRadioConsacrerOUI.checked) {
@@ -399,7 +429,6 @@ function afficherChampsAutre() {
     const premierBtnMensuel = radiosMontantMensuel[0] as HTMLInputElement;
     const premierBtnUnique = radiosMontantUnique[0] as HTMLInputElement;
 
-
     if (btnRadioDonMensuel.checked) {
         premierBtnUnique.checked = true;
         inputAutreUnique?.classList.add("cacher");
@@ -408,6 +437,7 @@ function afficherChampsAutre() {
         }
 
     } else if (btnRadioDonUnique.checked) {
+
         premierBtnMensuel.checked = true;
         inputAutreMensuel.classList.add("cacher");
         if (dernierRadioUnique.checked) {
@@ -426,9 +456,11 @@ function obtenirAutreMontant(event: any) {
     }
 }
 
-function afficherInformationsResumer(value :string){
+function afficherInformationsResumer(value: string) {
     champsPrenomResumer.innerText = value;
 }
+
+
 
 // Permet de valider que toutes les étapes ont été valider afin de permettre l'envoie du formulaire. 
 function validerEnvoieDon(event: any) {

@@ -1,9 +1,17 @@
 @use "sass:color";
 @use "../utilitaires/variables";
 
-.cacher {
-    display: none;
+main {
+    margin: 5% 5%;
+    @media(min-width: variables.$desktop) {
+        margin: 0 20%;
+    }
 }
+
+.orteil1 {
+    fill: variables.$bleuMoyen;
+}
+
 
 .BtnChoix {
     display: flex;
@@ -12,22 +20,29 @@
     margin: 0;
 }
 
-.listeDon {
-    list-style: none;
-}
+// .listeDon {
+//     list-style: none;
+
+//     @media(min-width:variables.$desktop) {
+//         display: flex;
+//         flex-direction: row;
+//         flex-wrap: wrap;
+//     }
+// }
 
 .champ-colonne {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
+
 input {
     border: 2px solid #ccc;
     border-radius: 4px;
     background: #f9f9f9;
-    // transition: border-color 0.2s;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
 }
+
 input[type="text"] input[type="number"] {
     width: 100%;
 }
@@ -37,6 +52,7 @@ input[type="radio"] {
 }
 
 .listeDon {
+    list-style: none;
     margin: 0;
     padding: 0;
 
@@ -44,9 +60,16 @@ input[type="radio"] {
         padding-bottom: 20px;
     }
 
-    // li:last-child input[type="number"] {
-    //     width: 100%;
-    // }
+    @media(min-width:variables.$desktop) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        >li {
+            padding: 0 20;
+        }
+    }
 }
 
 input[type="radio"]+label {
@@ -57,6 +80,8 @@ input[type="radio"]+label {
     flex-wrap: wrap;
     flex-direction: column;
     text-align: center;
+
+
 }
 
 input[type="radio"]:checked+label {
@@ -67,13 +92,86 @@ body {
     max-width: 100%;
 }
 
-header{
-    background-color:variables.$bleuPaleTransparent;
+header {
+    background-color: variables.$bleuPaleTransparent;
 }
 
-.logo{
+.logo {
     width: 30%;
     display: block;
     margin: 0 auto;
     padding-top: 20px;
+
+    @media(min-width: variables.$desktop) {
+        width: 10%;
+    }
+}
+
+.patte {
+    width: 35px;
+
+    &--1 {
+
+        // fill: green;
+        #orteil1 {
+            fill: variables.$bleuPale;
+            stroke: variables.$bleuMinuit;
+            stroke-width: 2px;
+        }
+    }
+
+    &--2 {
+
+        #orteil1,
+        #orteil2 {
+            fill: variables.$bleuPale;
+            stroke: variables.$bleuMinuit;
+            stroke-width: 2px;
+        }
+
+    }
+
+    &--3 {
+
+        #orteil1,
+        #orteil2,
+        #orteil3 {
+            fill: variables.$bleuPale;
+            stroke: variables.$bleuMinuit;
+            stroke-width: 2px;
+        }
+    }
+
+    &--4 {
+
+        #orteil1,
+        #orteil2,
+        #orteil3,
+        #orteil4 {
+            fill: variables.$bleuPale;
+            stroke: variables.$bleuMinuit;
+            stroke-width: 2px;
+        }
+    }
+
+    &--disabled {
+        fill: variables.$bleuMinuit;
+
+        #orteil1,
+        #orteil2,
+        #orteil3,
+        #orteil4 {
+            fill: variables.$bleuMinuit;
+        }
+    }
+}
+
+nav>ol>li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cacher {
+    display: none;
 }
