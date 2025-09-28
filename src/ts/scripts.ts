@@ -1,4 +1,3 @@
-const etapeNav = document.querySelectorAll("nav>ol>li");
 
 // ETAPES
 const etape1: HTMLElement | null = document.getElementById("etape1");
@@ -8,6 +7,10 @@ const etape4: HTMLElement | null = document.getElementById("etape4");
 const etapes = document.querySelectorAll("section");
 let numEtape: number = 0;
 let derniereEtapeValidee = 0;
+const etapeNav = document.querySelectorAll("nav>ol>li");
+const etapeNavLien = document.querySelectorAll("nav>ol>li>a");
+
+console.log(etapeNavLien);
 
 
 // BOUTONS NAVIGATION
@@ -16,21 +19,24 @@ const btnSuivant: HTMLElement | null = document.getElementById("btnSuivant");
 
 // SVG
 const svgEtape1 = document.querySelector('nav>ol>li:first-child svg');
-const svgEtape2 = document.querySelector('nav>ol>li:nth-child(2) svg')
-const orteil1 = document.getElementById("orteil1");
-const orteil2 = document.getElementById("orteil2");
-const orteil3 = document.getElementById("orteil3");
-const orteil4 = document.getElementById("orteil4");
+const svgEtape2 = document.querySelector('nav>ol>li:nth-child(2) svg');
+const orteil1 = document.getElementById("patte" + numEtape + 1 + "orteil1");
+const orteil2 = document.getElementById("patte" + numEtape + 1 + "orteil2");
+const orteil3 = document.getElementById("patte" + numEtape + 1 + "orteil3");
+const orteil4 = document.getElementById("patte" + numEtape + 1 + "orteil4");
 
+// ARR SVG
 const arrSvgPatte = document.querySelectorAll('nav>ol>li>svg.patte');
-console.log(arrSvgPatte);
+const arrSvgConfirmer = document.querySelectorAll('nav>ol>li>svg.svgConfirmer');
 
-
-
+// MSG ERREURS
 let messagesJson: any = null;
+
 // MONTANT DON
 const montantDonUnique = document.getElementById("listDonUnique") as HTMLInputElement;
 const montantDonMensuel = document.getElementById("listDonMensuel") as HTMLInputElement;
+let montantSelectionne = false;
+
 
 // PARTIE CACHER FORMULAIRE
 let estCacher = true;
@@ -49,6 +55,10 @@ const infoPersonneNotifier = document.getElementById("infoPersonneNotifier") as 
 const inputAutreUnique = document.getElementById("autreUnique") as HTMLInputElement;
 const inputAutreMensuel = document.getElementById("autreMensuel") as HTMLInputElement;
 const champsPrenomResumer = document.getElementById("resumePrenom") as HTMLElement;
+const champCarteResumer = document.getElementById("resumerCarteCredit") as HTMLElement;
+const prenomElement = document.getElementById('prenom') as HTMLInputElement;
+const champMontantDonResumer = document.getElementById("montantDonResumer") as HTMLElement;
+
 
 // FORMULAIRE
 const formulaire = document.querySelector("form") as HTMLFormElement;
@@ -103,6 +113,19 @@ radiosMontantMensuel.forEach(btnradio => {
     btnradio.addEventListener("click", obtenirAutreMontant);
 });
 
+etapeNavLien.forEach((etape, index) => {
+    if (index === 0) {
+        etape.addEventListener("click", function (e) {
+            e.preventDefault();
+            afficherEtape(index);
+        })
+    }
+})
+
+// const radioChecked = Array.from(radiosMontantMensuel).find(
+//     btn => (btn as HTMLInputElement).checked
+// ) as HTMLInputElement;
+
 
 // FUNCTIONS
 // Initialise le formulaire en cachant les parties ulterieur et en affichant uniquement le btn suivant.
@@ -113,25 +136,26 @@ function initialiser() {
     btnPrecedent?.classList.add("cacher");
     btnSuivant?.classList.remove("cacher");
     montantDonMensuel?.classList.add("cacher");
-    consacrerDon?.classList.add("cacher")
+    consacrerDon?.classList.add("cacher");
     infoPersonneNotifier?.classList.add("cacher");
     inputAutreUnique?.classList.add("cacher");
     inputAutreMensuel.classList.add("cacher");
-    arrSvgPatte[1].classList.add("patte--disabled")
-    arrSvgPatte[2].classList.add("patte--disabled")
-    arrSvgPatte[3].classList.add("patte--disabled")
-
+    arrSvgPatte[1].classList.add("patte--disabled");
+    arrSvgPatte[2].classList.add("patte--disabled");
+    arrSvgPatte[3].classList.add("patte--disabled");
     obtenirMessage();
     formulaire.noValidate = true;
 }
 
+
+
 // Permet la navigation en effectuant la validation de l'étape en cours. 
 function naviguerSuivant() {
-    validerEtape(numEtape);
     if (validerEtape(numEtape) == false) {
+        // rien
     } else {
 
-        // incrémente le numêro d'êtape.
+        // incrémente le numêro d'etape.
         numEtape++;
         afficherEtape(numEtape);
 
@@ -178,7 +202,6 @@ function afficherEtape(numEtape: number) {
         if (index == numEtape) {
             etape.classList.remove("cacher");
             arrSvgPatte[index].classList.remove("patte--disabled")
-
         }
         else {
             etape.classList.add("cacher");
@@ -203,18 +226,23 @@ function validerChamp(champ: HTMLInputElement): boolean {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].vide;
+        champ.classList.add("champErreur");
     } else if (champ.validity.typeMismatch && messagesJson[id].type) {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].type;
+        champ.classList.add("champErreur");
+
     } else if (champ.validity.patternMismatch && messagesJson[id].pattern) {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].pattern;
+        champ.classList.add("champErreur");
+
     } else {
         valide = true;
         erreurElement.innerText = "";
-
+        champ.classList.remove("champErreur");
     }
 
     return valide;
@@ -244,18 +272,25 @@ function validerEmail(champ: HTMLInputElement) {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].vide;
+        champ.classList.add("champErreur");
+
     } else if (champ.validity.typeMismatch && messagesJson[id].type) {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].type;
+        champ.classList.add("champErreur");
+
     } else if (champ.validity.patternMismatch && messagesJson[id].pattern) {
 
         valide = false;
         erreurElement.innerText = messagesJson[id].pattern;
+        champ.classList.add("champErreur");
+
     } else if (tldSuspicieux.some((tld => {
         const contientSuspect = leEmail.toLowerCase().endsWith(tld);
         if (contientSuspect) {
             valide = false;
+            champ.classList.add("champErreur");
             if (messagesJson[id].tldSuspicieux) {
                 erreurElement.innerText = messagesJson[id].tldSuspicieux;
             }
@@ -274,9 +309,13 @@ function validerEmail(champ: HTMLInputElement) {
             const monMessage = messagesJson[id].erreursCommune.replace("{domaine}", domaineCorrect);
             valide = false;
             erreurElement.innerText = monMessage;
+            champ.classList.add("champErreur");
+
         } else {
             erreurElement.innerText = "";
             valide = true;
+            champ.classList.remove("champErreur");
+
         }
 
 
@@ -291,30 +330,63 @@ function validerEtape(etape: number): boolean {
 
     switch (etape) {
         case 0:
-            const NomEtreCherValide = validerChamp(NomEtreCher);
-            const nomPersNotifierValide = validerChamp(nomPersNotifier);
-            const emailPersNotifierValide = validerEmail(emailPersNotifier);
+            // Vérification du montant sélectionné (unique ou mensuel)
+            let montantErreurElement = document.getElementById("err-montant") as HTMLElement;
+            const radioUniqueChecked = Array.from(radiosMontantUnique).some((btn) => (btn as HTMLInputElement).checked);
+            const radioMensuelChecked = Array.from(radiosMontantMensuel).some((btn) => (btn as HTMLInputElement).checked);
+            const dernierRadioUnique = radiosMontantUnique[radiosMontantUnique.length - 1] as HTMLInputElement;
+            const dernierRadioMensuel = radiosMontantMensuel[radiosMontantMensuel.length - 1] as HTMLInputElement;
+            montantSelectionne = radioUniqueChecked || radioMensuelChecked;
+            
+            if (!montantSelectionne) {
+                etapeValide = false;
+                montantErreurElement.innerText = "Veuillez sélectionner un montant de don.";
+                break;
+            } if (dernierRadioMensuel.checked && inputAutreMensuel.value == "") {
+                // Affiche une erreur pour le montant mensuel
+                montantErreurElement.innerText = "Veuillez entrez un montant de don.";
+                break;
+            }
+            if (dernierRadioUnique.checked && inputAutreUnique.value == "") {
+                // Affiche une erreur pour le montant unique
+                console.log("Autre montant invalide UNIQUE")
+
+                break;
+            } else {
+                montantErreurElement.innerText = "";
+            }
 
 
             if (estCacher === true && estCacherFormulaire2 === true) {
                 etapeValide = true;
-            } else if (!NomEtreCherValide) {
-                etapeValide = false;
-            } else if (estCacherFormulaire2 === false) {
-                if (!nomPersNotifierValide || !emailPersNotifierValide) {
-                    etapeValide = false;
-                } else {
-                    etapeValide = true;
+                arrSvgPatte[numEtape].classList.add("cacher");
+                arrSvgConfirmer[numEtape].classList.remove("cacher");
+            } else if (estCacher === false) {
+                const NomEtreCherValide = validerChamp(NomEtreCher);
+                if (estCacherFormulaire2 === true) {
+                    if (!NomEtreCherValide) {
+                        etapeValide = false;
+                    } else {
+                        etapeValide = true;
+                        arrSvgPatte[numEtape].classList.add("cacher");
+                        arrSvgConfirmer[numEtape].classList.remove("cacher");
+                    }
+                } else if (estCacherFormulaire2 === false) {
+                    const nomPersNotifierValide = validerChamp(nomPersNotifier);
+                    const emailPersNotifierValide = validerEmail(emailPersNotifier);
+                    if (!NomEtreCherValide || !nomPersNotifierValide || !emailPersNotifierValide) {
+                        etapeValide = false;
+                    } else {
+                        etapeValide = true;
+                        arrSvgPatte[numEtape].classList.add("cacher");
+                        arrSvgConfirmer[numEtape].classList.remove("cacher");
+                    }
                 }
-            } else {
-                etapeValide = true;
-
             }
             break;
 
         case 1:
             const nomElement = document.getElementById('nom') as HTMLInputElement;
-            const prenomElement = document.getElementById('prenom') as HTMLInputElement;
             const emailElement = document.getElementById('email') as HTMLInputElement;
             const adresseElement = document.getElementById('adresse') as HTMLInputElement;
             const codePostal = document.getElementById('codePostal') as HTMLInputElement;
@@ -335,13 +407,16 @@ function validerEtape(etape: number): boolean {
                     etapeValide = false;
                 } else {
                     etapeValide = true;
-                    afficherInformationsResumer(prenomElement.value);
+                    arrSvgPatte[numEtape].classList.add("cacher");
+                    arrSvgConfirmer[numEtape].classList.remove("cacher");
                 }
             } else {
                 if (!nomEntrepriseValide || !nomValide || !prenomValide || !emailValide || !adresseValide || !codePostalValide || !villeValide || !provinceValide) {
                     etapeValide = false;
                 } else {
                     etapeValide = true;
+                    arrSvgPatte[numEtape].classList.add("cacher");
+                    arrSvgConfirmer[numEtape].classList.remove("cacher");
                 }
             }
             break;
@@ -360,6 +435,9 @@ function validerEtape(etape: number): boolean {
                 etapeValide = false;
             } else {
                 etapeValide = true;
+                arrSvgPatte[numEtape].classList.add("cacher");
+                arrSvgConfirmer[numEtape].classList.remove("cacher");
+                afficherInformationsResumer(prenomElement.value, numCarte.value);
             }
             break;
     }
@@ -374,12 +452,37 @@ function validerBtnRadio() {
     if (btnRadioDonMensuel.checked) {
         montantDonMensuel?.classList.remove("cacher");
         montantDonUnique?.classList.add("cacher");
+        // 
+        // Fait une recherche internet pour trouver comment convertir un nodelist en array
+        // Trouver l'information sur : https://stackoverflow.com/questions/3199588/fastest-way-to-convert-javascript-nodelist-to-array 
+        // et https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/from 
+        // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+        // 
+        // si le btnRadio Mensuel est selectionner on créer un array à partir de la nodeListe afin de vérifier si un des boutons est 
+        // sélectionner. Si il est sélectionner on attribut sa valeur aux 2 champs du résumer de fin de formulaire.
+        const radioChecked = Array.from(radiosMontantMensuel).find(
+            btn => (btn as HTMLInputElement).checked
+        ) as HTMLInputElement;
+        if (radioChecked) {
+            champMontantDonResumer.innerText = radioChecked.value;
+            champMontantDon.innerText = radioChecked.value;
+        }
         afficherChampsAutre();
     }
     // Si le btn radio de don unique est sélectionner, ont cache la liste des dons mensuels.
+    const radioCheckedUnique = Array.from(radiosMontantUnique).find(
+        btn => (btn as HTMLInputElement).checked
+    ) as HTMLInputElement;
     if (btnRadioDonUnique.checked) {
         montantDonMensuel?.classList.add("cacher");
         montantDonUnique?.classList.remove("cacher");
+        const radioChecked = Array.from(radiosMontantUnique).find(
+            btn => (btn as HTMLInputElement).checked
+        ) as HTMLInputElement;
+        if (radioCheckedUnique) {
+            champMontantDonResumer.innerText = radioCheckedUnique.value;
+            champMontantDon.innerText = radioCheckedUnique.value;
+        }
         afficherChampsAutre();
 
     }
@@ -430,15 +533,12 @@ function afficherChampsAutre() {
     const premierBtnUnique = radiosMontantUnique[0] as HTMLInputElement;
 
     if (btnRadioDonMensuel.checked) {
-        premierBtnUnique.checked = true;
         inputAutreUnique?.classList.add("cacher");
         if (dernierRadioMensuel.checked) {
             inputAutreMensuel.classList.remove("cacher");
         }
 
     } else if (btnRadioDonUnique.checked) {
-
-        premierBtnMensuel.checked = true;
         inputAutreMensuel.classList.add("cacher");
         if (dernierRadioUnique.checked) {
             inputAutreUnique?.classList.remove("cacher");
@@ -449,15 +549,23 @@ function afficherChampsAutre() {
 // Permet d'obtenir la valeur entrée dans le champs autre montant.
 function obtenirAutreMontant(event: any) {
     let valeurMontant = event.currentTarget.value;
+    champMontantDonResumer.innerText = "";
+
     if (event.currentTarget.value == "autreMontant") {
         valeurMontant = inputAutreMensuel.innerText;
     } else {
+        // champMontantDonResumer.innerText = "";
         champMontantDon.innerText = valeurMontant;
+        champMontantDonResumer.innerText = valeurMontant;
+        console.log(champMontantDonResumer.innerText);
     }
 }
 
-function afficherInformationsResumer(value: string) {
+function afficherInformationsResumer(value: string, value2: string) {
     champsPrenomResumer.innerText = value;
+    const dernierChiffreCarte = value2.substring(12);
+    champCarteResumer.innerText = dernierChiffreCarte;
+
 }
 
 
