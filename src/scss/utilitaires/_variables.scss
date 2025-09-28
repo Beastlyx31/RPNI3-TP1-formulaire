@@ -25,9 +25,7 @@ $fonteSecondaire : costa, sans-serif;
 /* Couleurs de base */
 $bleuMoyen: #2A6F97;
 $bleuPale: #68a8e8;
-$vertLime: #bbd531;
 $bleuMinuit: #1B263B;
-$bleuMarin: #2678B5;
 $rougeErreur: #C60000;
 
 
@@ -35,7 +33,7 @@ $bleuMoyenTransparent : color.adjust($bleuMoyen, $alpha: -0.50);
 $bleuPaleTransparent : color.adjust($bleuPale, $alpha: -0.50);
 
 /* Autres couleurs */
-$hyperlien: $bleuMarin;
+$hyperlien: $bleuMinuit;
 
 /** Points de rupture **/
 $desktop : 601px;
