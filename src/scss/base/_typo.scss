@@ -42,22 +42,11 @@ h1,
   text-align: center;
   padding: 20px;
 
-  &--desktop {
-    font-size: 48px;
-    font-size: 4.8rem;
+  @media(min-width:variables.$desktop) {
+    font-size: 40px;
+    font-size: 4rem;
     padding-bottom: 15px;
     position: relative;
-
-    &:after {
-      background-color: variables.$bleuMoyen;
-      content: "";
-      display: inline-block;
-      width: 150px;
-      height: 8px;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
   }
 }
 
@@ -67,9 +56,9 @@ h2,
   font-size: 2rem;
   text-transform: uppercase;
 
-  &--desktop {
-    font-size: 28px;
-    font-size: 2.8rem;
+  @media(min-width: variables.$desktop) {
+    font-size: 24px;
+    font-size: 2.4rem;
   }
 }
 
@@ -78,10 +67,11 @@ h3,
   font-size: 18px;
   font-size: 1.8rem;
 
-  &--desktop {
+  @media(min-width: variables.$desktop) {
     font-size: 22px;
     font-size: 2.2rem;
   }
+
 }
 
 .texte {
@@ -96,11 +86,19 @@ h3,
 }
 
 .erreur {
-  color: red;
+  color: variables.$rougeErreur;
 }
 
 .listeDon__item--montant {
   font-weight: bolder;
   font-size: 22px;
+  text-align: center;
+}
+
+.remerciment {
+  text-align: center;
+}
+
+.signature{
   text-align: center;
 }

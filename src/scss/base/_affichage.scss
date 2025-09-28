@@ -25,7 +25,7 @@ main {
 
 .champErreur {
     background: #FDE2E4;
-    border: solid red 3px;
+    border: solid variables.$rougeErreur 3px;
 }
 
 input {
@@ -157,4 +157,15 @@ nav>ol>li {
 
 .etapes__item {
     text-decoration: none;
+}
+
+.imgMerci {
+    display: block;
+    width: 20%;
+    margin: 40px auto;
+
+    @media(min-width: variables.$desktop) {
+        width: 90%;
+        margin: 40px auto;
+    }
 }

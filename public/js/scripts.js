@@ -1,4 +1,9 @@
 "use strict";
+// Fait une recherche internet pour trouver comment convertir un nodelist en array
+// Trouver l'information sur : https://stackoverflow.com/questions/3199588/fastest-way-to-convert-javascript-nodelist-to-array 
+// et https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/from 
+// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+// 
 // ETAPES
 const etape1 = document.getElementById("etape1");
 const etape2 = document.getElementById("etape2");
@@ -9,7 +14,6 @@ let numEtape = 0;
 let derniereEtapeValidee = 0;
 const etapeNav = document.querySelectorAll("nav>ol>li");
 const etapeNavLien = document.querySelectorAll("nav>ol>li>a");
-console.log(etapeNavLien);
 // BOUTONS NAVIGATION
 const btnPrecedent = document.getElementById("btnPrecedent");
 const btnSuivant = document.getElementById("btnSuivant");
@@ -64,9 +68,6 @@ const btnRadioPerso = document.getElementById("personnel");
 const radiosMontantUnique = document.querySelectorAll('input[type="radio"][name="montantDonUnique"]');
 const radiosMontantMensuel = document.querySelectorAll('input[type="radio"][name="montantDonMensuel"]');
 const consacrerDon = document.getElementById("enHonneur");
-// const arrMontantDonUnique = Array.from(radiosMontantUnique);
-// const arrMontantDonMensuel = Array.from(radiosMontantMensuel);
-// const arrMontants = arrMontantDonMensuel.concat(arrMontantDonUnique);
 // EVENTLISTENER
 window.addEventListener("load", initialiser);
 btnSuivant?.addEventListener("click", naviguerSuivant);
@@ -93,16 +94,16 @@ radiosMontantMensuel.forEach(btnradio => {
     btnradio.addEventListener("click", obtenirAutreMontant);
 });
 etapeNavLien.forEach((etape, index) => {
-    if (index === 0) {
-        etape.addEventListener("click", function (e) {
-            e.preventDefault();
+    etape.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (index <= numEtape) {
+            numEtape = index;
+            console.log(index + "index");
+            console.log(numEtape + "numEtape");
             afficherEtape(index);
-        });
-    }
+        }
+    });
 });
-// const radioChecked = Array.from(radiosMontantMensuel).find(
-//     btn => (btn as HTMLInputElement).checked
-// ) as HTMLInputElement;
 // FUNCTIONS
 // Initialise le formulaire en cachant les parties ulterieur et en affichant uniquement le btn suivant.
 function initialiser() {
@@ -300,7 +301,7 @@ function validerEtape(etape) {
             }
             if (dernierRadioUnique.checked && inputAutreUnique.value == "") {
                 // Affiche une erreur pour le montant unique
-                console.log("Autre montant invalide UNIQUE");
+                montantErreurElement.innerText = "Veuillez entrez un montant de don.";
                 break;
             }
             else {
@@ -310,6 +311,7 @@ function validerEtape(etape) {
                 etapeValide = true;
                 arrSvgPatte[numEtape].classList.add("cacher");
                 arrSvgConfirmer[numEtape].classList.remove("cacher");
+                console.log("tout est good");
             }
             else if (estCacher === false) {
                 const NomEtreCherValide = validerChamp(NomEtreCher);
@@ -380,7 +382,6 @@ function validerEtape(etape) {
             const numCarteValide = validerChamp(numCarte);
             const cvcValide = validerChamp(cvc);
             const expirationCarteValide = validerChamp(expirationCarte);
-            console.log(numCarteValide);
             if (!numCarteValide || !cvcValide || !expirationCarteValide) {
                 etapeValide = false;
             }
@@ -400,32 +401,11 @@ function validerBtnRadio() {
     if (btnRadioDonMensuel.checked) {
         montantDonMensuel?.classList.remove("cacher");
         montantDonUnique?.classList.add("cacher");
-        // 
-        // Fait une recherche internet pour trouver comment convertir un nodelist en array
-        // Trouver l'information sur : https://stackoverflow.com/questions/3199588/fastest-way-to-convert-javascript-nodelist-to-array 
-        // et https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/from 
-        // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        // 
-        // si le btnRadio Mensuel est selectionner on créer un array à partir de la nodeListe afin de vérifier si un des boutons est 
-        // sélectionner. Si il est sélectionner on attribut sa valeur aux 2 champs du résumer de fin de formulaire.
-        const radioChecked = Array.from(radiosMontantMensuel).find(btn => btn.checked);
-        if (radioChecked) {
-            champMontantDonResumer.innerText = radioChecked.value;
-            champMontantDon.innerText = radioChecked.value;
-        }
-        afficherChampsAutre();
     }
     // Si le btn radio de don unique est sélectionner, ont cache la liste des dons mensuels.
-    const radioCheckedUnique = Array.from(radiosMontantUnique).find(btn => btn.checked);
     if (btnRadioDonUnique.checked) {
         montantDonMensuel?.classList.add("cacher");
         montantDonUnique?.classList.remove("cacher");
-        const radioChecked = Array.from(radiosMontantUnique).find(btn => btn.checked);
-        if (radioCheckedUnique) {
-            champMontantDonResumer.innerText = radioCheckedUnique.value;
-            champMontantDon.innerText = radioCheckedUnique.value;
-        }
-        afficherChampsAutre();
     }
     if (btnRadioConsacrerNON.checked) {
         consacrerDon?.classList.add("cacher");
@@ -471,26 +451,33 @@ function afficherChampsAutre() {
         if (dernierRadioMensuel.checked) {
             inputAutreMensuel.classList.remove("cacher");
         }
+        else {
+            inputAutreMensuel.classList.add("cacher");
+            inputAutreMensuel.innerText = "";
+        }
     }
     else if (btnRadioDonUnique.checked) {
         inputAutreMensuel.classList.add("cacher");
         if (dernierRadioUnique.checked) {
             inputAutreUnique?.classList.remove("cacher");
         }
+        else {
+            inputAutreUnique.classList.add("cacher");
+            inputAutreUnique.innerText = "";
+        }
     }
 }
 // Permet d'obtenir la valeur entrée dans le champs autre montant.
 function obtenirAutreMontant(event) {
+    afficherChampsAutre();
     let valeurMontant = event.currentTarget.value;
     champMontantDonResumer.innerText = "";
     if (event.currentTarget.value == "autreMontant") {
         valeurMontant = inputAutreMensuel.innerText;
     }
     else {
-        // champMontantDonResumer.innerText = "";
         champMontantDon.innerText = valeurMontant;
         champMontantDonResumer.innerText = valeurMontant;
-        console.log(champMontantDonResumer.innerText);
     }
 }
 function afficherInformationsResumer(value, value2) {
