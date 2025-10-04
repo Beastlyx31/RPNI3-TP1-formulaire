@@ -62,6 +62,7 @@ const champsPrenomResumer = document.getElementById("resumePrenom") as HTMLEleme
 const champCarteResumer = document.getElementById("resumerCarteCredit") as HTMLElement;
 const prenomElement = document.getElementById('prenom') as HTMLInputElement;
 const champMontantDonResumer = document.getElementById("montantDonResumer") as HTMLElement;
+const numCarte = document.getElementById("numCarte") as HTMLInputElement;
 
 
 // FORMULAIRE
@@ -104,6 +105,10 @@ btnRadioPerso?.addEventListener("click", validerBtnRadio);
 btnEnvoyer?.addEventListener("click", validerEnvoieDon);
 inputAutreMensuel.addEventListener("change", obtenirAutreMontant);
 inputAutreUnique.addEventListener("change", obtenirAutreMontant);
+numCarte.addEventListener("blur", function () {
+    validerChamp(numCarte);
+});
+
 
 // BOUCLES
 // Pour chaque boutons radios ont attributs un eventListener
@@ -118,11 +123,9 @@ etapeNavLien.forEach((etape, index) => {
     etape.addEventListener("click", function (e) {
         e.preventDefault();
         if (index <= numEtape) {
-            numEtape=index;
-            console.log(index + "index");
-            console.log(numEtape + "numEtape");
+            numEtape = index;
 
-            afficherEtape(index);
+            afficherEtape(numEtape);
         }
     })
 });
@@ -131,6 +134,7 @@ etapeNavLien.forEach((etape, index) => {
 // Initialise le formulaire en cachant les parties ulterieur et en affichant uniquement le btn suivant.
 function initialiser() {
     etape2?.classList.add("cacher");
+
     etape3?.classList.add("cacher");
     etape4?.classList.add("cacher");
     btnPrecedent?.classList.add("cacher");
@@ -144,6 +148,8 @@ function initialiser() {
     arrSvgPatte[2].classList.add("patte--disabled");
     arrSvgPatte[3].classList.add("patte--disabled");
     obtenirMessage();
+    validerBtnRadio();
+
     formulaire.noValidate = true;
 }
 
@@ -154,23 +160,8 @@ function naviguerSuivant() {
     if (validerEtape(numEtape) == false) {
         // rien
     } else {
-
-        // incrémente le numêro d'etape.
         numEtape++;
         afficherEtape(numEtape);
-
-
-        if (numEtape == 0) {
-            btnSuivant?.classList.remove("cacher");
-        };
-        if (numEtape == 1) {
-            btnPrecedent?.classList.remove("cacher");
-            validerBtnRadio();
-        };
-        if (numEtape == 3) {
-            btnSuivant?.classList.add("cacher");
-
-        };
     }
 }
 
@@ -178,33 +169,37 @@ function naviguerSuivant() {
 function naviguerPrecedent() {
     numEtape--;
     afficherEtape(numEtape);
-    if (numEtape == 0) {
+}
+
+function afficherBoutonsNavigation() {
+    if (numEtape === 0) {
         btnPrecedent?.classList.add("cacher");
         btnSuivant?.classList.remove("cacher");
-    }
-    if (numEtape == 1) {
+    } else if (numEtape === etapes.length - 1) {
+        btnPrecedent?.classList.remove("cacher");
+        btnSuivant?.classList.add("cacher");
+    } else {
         btnPrecedent?.classList.remove("cacher");
         btnSuivant?.classList.remove("cacher");
-    }
-    if (numEtape == 2) {
-        btnSuivant?.classList.remove("cacher");
-    }
-    if (numEtape == 3) {
-        btnSuivant?.classList.add("cacher");
-
-
     }
 }
 
 // Permet d'afficher uniquement l'étape du formulaire qui correspond au numéro
 function afficherEtape(numEtape: number) {
+    afficherBoutonsNavigation();
     etapes.forEach((etape, index) => {
         if (index == numEtape) {
             etape.classList.remove("cacher");
             arrSvgPatte[index].classList.remove("patte--disabled")
+            if (index <= numEtape) {
+                etapeNavLien[index].setAttribute("aria-disabled", "false");
+            }
         }
         else {
             etape.classList.add("cacher");
+            if (index >= numEtape) {
+                etapeNavLien[index].setAttribute("aria-disabled", "true");
+            }
         }
     });
 };
@@ -363,7 +358,6 @@ function validerEtape(etape: number): boolean {
                 etapeValide = true;
                 arrSvgPatte[numEtape].classList.add("cacher");
                 arrSvgConfirmer[numEtape].classList.remove("cacher");
-                console.log("tout est good")
             } else if (estCacher === false) {
                 const NomEtreCherValide = validerChamp(NomEtreCher);
                 if (estCacherFormulaire2 === true) {

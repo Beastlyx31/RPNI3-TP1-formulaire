@@ -22,7 +22,7 @@
             <ellipse cx="23.78" cy="19.53" rx="6.52" ry="11.77" transform="rotate(-17.11 23.78 19.518)" />
             <ellipse cx="10.75" cy="40.26" rx="6.52" ry="11.77" transform="rotate(-17.11 10.734 40.261)" />
         </svg>
-        <h1>Patte de coeur</h1>
+        <h1>Coeur de patte</h1>
     </header>
     <main>
         <nav class="etapes">
@@ -338,24 +338,17 @@
                     <label for="numApp">Numero appartement</label>
                     <input type="text" id="numApp" autocomplete="address-line2" name="adresse2">
 
-                    <label for="codePostal">Code postal</label>
-                    <input type="text" id="codePostal" name="cp" placeholder="A1B 2C3" aria-describedby="err-codePostal"
-                        autocomplete="postal-code" maxlength="6" required>
-                    <span class="exemple">Exemple : A1B 2C3</span>
-                    <!-- Span pour message erreur -->
-                    <span class="erreur" id="err-codePostal" role="alert" aria-live="polite"></span>
-                    <!-- // -->
-
+                    
                     <label for="ville">Ville</label>
                     <input type="text" id="ville" name="ville" aria-describedby="err-ville"
-                        pattern="^[a-zA-ZÀ-ÿ0-9 '\-]+$" required>
+                    pattern="^[a-zA-ZÀ-ÿ0-9 '\-]+$" required>
                     <!-- Span pour message erreur -->
                     <span class="erreur" id="err-ville" role="alert" aria-live="polite"></span>
                     <!-- // -->
-
+                    
                     <label for="province">Province</label>
                     <input type="text" list="provincesListe" name="province" id="province"
-                        aria-describedby="err-province">
+                    aria-describedby="err-province">
                     <datalist id="provincesListe">
                         <option value="">--Choisissez votre province--</option>
                         <option value="Alberta">Alberta</option>
@@ -372,10 +365,17 @@
                         <option value="Territoires du Nord-Ouest">Territoires du Nord-Ouest</option>
                         <option value="Yukon">Yukon</option>
                     </datalist>
-
+                    
                     <!-- Span pour message erreur -->
                     <span class="erreur" id="err-province" role="alert" aria-live="polite"></span>
-
+                    
+                    <label for="codePostal">Code postal</label>
+                    <input type="text" id="codePostal" name="cp" placeholder="A1B 2C3" aria-describedby="err-codePostal"
+                        autocomplete="postal-code" maxlength="6" required>
+                    <span class="exemple">Exemple : A1B 2C3</span>
+                    <!-- Span pour message erreur -->
+                    <span class="erreur" id="err-codePostal" role="alert" aria-live="polite"></span>
+                    <!-- // -->
                 </fieldset>
             </section>
 
@@ -419,8 +419,8 @@
                  </dl>
             
 
-                <button type="submit" name="envoyerDon" id="envoyerDon">Faire un don de <span
-                        id="montantDonBtn"></span>$</button>
+                <button type="submit" class="bouton bouton--hover" name="envoyerDon" id="envoyerDon">Faire un don de <span
+                        id="montantDonBtn"></span> $</button>
 
             </section>
             <!-- Boutons de navigation entre les étapes -->
@@ -432,6 +432,9 @@
         <!-- Fin du formulaire de don principal -->
 
     </main>
+    <footer>
+        <p class="creditFooter"><small>Coeur de patte - 2025</small></p>
+    </footer>
 </body>
 
 </html>

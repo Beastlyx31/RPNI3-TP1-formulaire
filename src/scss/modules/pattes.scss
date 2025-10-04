@@ -2,12 +2,14 @@
 @use "../utilitaires/variables";
 
 
+// Affiche les couleurs de orteils des pattes dans le fil de navigation.
+
+// fixe la largeur du svg
 .patte {
     width: 35px;
 
     &--1 {
 
-        // fill: green;
         #patte1orteil1 {
             fill: variables.$bleuPale;
             stroke: variables.$bleuMinuit;
@@ -69,6 +71,7 @@
     }
 }
 
+// Le svg dans la page merci
 .patteMerci{
     fill: variables.$rougeErreur;
     width: 12%;
