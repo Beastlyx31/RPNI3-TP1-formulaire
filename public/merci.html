@@ -20,8 +20,12 @@
         </svg>
         <h1>Patte de coeur</h1>
     </header>
-    <img class="imgMerci" src="images/photoMerci-mobile.jpg"
-        alt="Chat noir assis devant une fenêtre regardant devant lui">
+    <main>
+    <picture>
+        <source srcset="images/photoMerci-mobile.jpg" media="(max-width: 601px)">
+        <source srcset="images/photoMerci-Table.jpg">
+        <img class="imgMerci" src="images/photoMerci-mobile.jpg" alt="Chat noir assis devant une fenêtre">
+    </picture>
     <h2 class="remerciment">Merci d'avoir contribuer à aider nos amis à 4 pattes </h2>
     <svg class="patteMerci" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.37 74.37">
         <path id="coeur2"
@@ -37,6 +41,10 @@
     </svg>
 
     <h3 class="signature">- Coeur de patte</h3>
+    </main>
+        <footer>
+        <p class="creditFooter"><small>Coeur de patte - 2025</small></p>
+    </footer>
 </body>
 
 </html>
